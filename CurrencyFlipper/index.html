@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="adviweather icon" href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/favicon.ico">
+    <title>Currency Budy</title>
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<body>
+    <div class="converter">
+        <h1>Currency Buddy</h1>
+        <div>
+            <input type="number" id="amount" placeholder="Enter amount" />
+        </div>
+        <div>
+            <select id="fromCurrency"></select>
+            <span>to</span>
+            <select id="toCurrency"></select>
+        </div>
+        <div>
+            <button onclick="convertCurrency()">Convert</button>
+        </div>
+        <div id="result"></div>
+    </div>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
