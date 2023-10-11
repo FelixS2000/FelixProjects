@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.recipe-bg {
+    background-image: url('better-recipe-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#recipeContainer {
+    display: none;
+}
+
+#recipeImage {
+    max-width: 400px; /* Set the maximum width for a medium-sized image */
+    height: auto;
+    border-radius: 10px;
+}
+
+#recipeName {
+    font-size: 24px;
+    margin: 20px 0;
+}
+#recipeInformation {
+    font-size: 18px;
+    text-align: left; /* Align text to the left */
+    margin-top: 20px; /* Add some spacing between the recipe name and instructions */
+    padding: 20px; /* Add padding for better readability */
+    border: 1px solid #ccc; /* Add a border for better separation */
+    border-radius: 5px; /* Round the corners of the instructions box */
+    background-color: #f9f9f9; /* Use a light gray background for better contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    line-height: 1.6; /* Increase line height for better readability */
+}
