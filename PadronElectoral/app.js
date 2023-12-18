@@ -28,8 +28,8 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/FelixProjects/PadronElectoral/addVoter', (req, res) => {
-    res.sendFile(__dirname + '/FelixProjects/PadronElectoral/addVoter.html');
+app.get('/PadronElectoral/addVoters/addVoter.html', (req, res) => {
+    res.sendFile(__dirname + '/PadronElectoral/addVoters/addVoter.html');
 });
 
 app.post('/addVoter', (req, res) => {
