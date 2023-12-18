@@ -11,7 +11,7 @@
             "driver": "MySQL",
             "name": "felix",
             "username": "root",
-            "database": "felix",
+            "database": "padronelectoral",
             "askForPassword": true
         }
     ]
