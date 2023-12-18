@@ -28,6 +28,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/addVoter', (req, res) => {
+    res.sendFile(__dirname + '/FelixProjects/addVoter.html');
+});
+
 app.post('/addVoter', (req, res) => {
     const { name, age, address } = req.body;
     const query = 'INSERT INTO voters (name, age, address) VALUES (?, ?, ?)';
@@ -36,6 +40,7 @@ app.post('/addVoter', (req, res) => {
         res.send('Voter added successfully!');
     });
 });
+
 
 // Start the server
 app.listen(port, () => {
