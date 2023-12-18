@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/addVoter', (req, res) => {
+app.get('/FelixProjects/addVoter', (req, res) => {
     res.sendFile(__dirname + '/FelixProjects/addVoter.html');
 });
 
