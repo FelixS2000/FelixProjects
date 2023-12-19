@@ -2,12 +2,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const cors = require('cors');
+const mysql = require('mysql');
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const db = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: process.env.DB_PASSWORD,
+    database: 'padronElectoral',
+    port: 3306
+});
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -17,8 +27,6 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + '-' + file.originalname);
     }
 });
-
-const upload = multer({ storage: storage });
 
 app.post('/register', upload.single('image'), (req, res) => {
     try {
