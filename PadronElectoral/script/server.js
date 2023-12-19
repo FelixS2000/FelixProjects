@@ -38,7 +38,7 @@ app.post('/register', upload.single('image'), (req, res) => {
     const location = req.body.location;
     const image = req.file.path;
 
-    let sql = `INSERT INTO electores (fname, gender, age, location, image) VALUES (?, ?, ?, ?, ?)`;
+    let sql = `INSERT INTO voters (fname, gender, age, location, image) VALUES (?, ?, ?, ?, ?)`;
     let query = db.query(sql, [fname, gender, age, location, image], (err, result) => {
         if (err) throw err;
         res.send('Registro Exitoso');
