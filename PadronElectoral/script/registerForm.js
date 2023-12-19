@@ -3,7 +3,7 @@ document.getElementById('registroForm').addEventListener('submit', function (eve
     var formData = new FormData(event.target);
 
     // Update the URL to the correct server endpoint
-    fetch('http://localhost:3000/register', {
+    fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/register/', {
         method: 'POST',
         body: formData
     })

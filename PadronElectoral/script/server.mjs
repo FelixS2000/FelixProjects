@@ -42,7 +42,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-app.post('/register', upload.single('image'), (req, res) => {
+app.post('https://felixc2000.github.io/FelixProjects/PadronElectoral/register/', upload.single('image'), (req, res) => {
     try {
         const fname = req.body.fname;
         const gender = req.body.gender;
@@ -61,7 +61,7 @@ app.post('/register', upload.single('image'), (req, res) => {
     }
 });
 
-app.get('/getFormData', (req, res) => {
+app.get('/https://felixc2000.github.io/FelixProjects/PadronElectoral/', (req, res) => {
     // Replace the following sample data with your actual data retrieval logic
     const formData = {
         title: 'Dynamic Form Title', // Get this from your server or database

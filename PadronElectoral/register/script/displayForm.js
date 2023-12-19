@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     // Fetch data from the server and update the content
-    fetch('http://localhost:3000/getFormData') // Assuming you have an endpoint to get form data
+    fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/') // Assuming you have an endpoint to get form data
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
