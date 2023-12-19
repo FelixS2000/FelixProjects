@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const mysql = require('mysql');
-require('dotenv').config(); // Load environment variables from a .env file
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
@@ -34,9 +34,17 @@ const upload = multer({ storage: storage });
 
 app.post('/register', upload.single('image'), (req, res) => {
     try {
-        // Your existing code for handling form data
+        const fname = req.body.fname;
+        const gender = req.body.gender;
+        const age = req.body.age;
+        const location = req.body.location;
+        const image = req.file.path;
 
-        res.status(200).json({ message: 'Registro Exitoso' });
+        let sql = `INSERT INTO voters (fname, gender, age, location, image) VALUES (?, ?, ?, ?, ?)`;
+        let query = db.query(sql, [fname, gender, age, location, image], (err, result) => {
+            if (err) throw err;
+            res.status(200).json({ message: 'Registro Exitoso' });
+        });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal Server Error' });

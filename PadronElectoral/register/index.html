@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padrón Electoral</title>
+    <link rel="stylesheet" href="./style/styles.css">
+</head>
+
+<body>
+
+    <h2>Registro de Electores</h2>
+
+    <form id="registroForm">
+        <label for="fname">Nombre Completo:</label><br>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="gender">Género:</label><br>
+        <select id="gender" name="gender">
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+        </select><br>
+        <label for="age">Edad:</label><br>
+        <input type="number" id="age" name="age"><br>
+        <label for="location">Ubicación:</label><br>
+        <input type="text" id="location" name="location"><br>
+        <label for="image">Imagen:</label><br>
+        <input type="file" id="image" name="image"><br>
+        <input type="submit" value="Registrar">
+    </form>
+
+    <script src="registerForm.js"></script>
+
+</body>
+
+</html>
