@@ -32,17 +32,22 @@ db.connect((err) => {
 });
 
 app.post('/register', upload.single('image'), (req, res) => {
-    const fname = req.body.fname;
-    const gender = req.body.gender;
-    const age = req.body.age;
-    const location = req.body.location;
-    const image = req.file.path;
+    try {
+        const fname = req.body.fname;
+        const gender = req.body.gender;
+        const age = req.body.age;
+        const location = req.body.location;
+        const image = req.file.path;
 
-    let sql = `INSERT INTO voters (fname, gender, age, location, image) VALUES (?, ?, ?, ?, ?)`;
-    let query = db.query(sql, [fname, gender, age, location, image], (err, result) => {
-        if (err) throw err;
-        res.send('Registro Exitoso');
-    });
+        let sql = `INSERT INTO voters (fname, gender, age, location, image) VALUES (?, ?, ?, ?, ?)`;
+        let query = db.query(sql, [fname, gender, age, location, image], (err, result) => {
+            if (err) throw err;
+            res.send('Registro Exitoso');
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Error:', error);
+    }
 });
 
 app.listen('3000', () => {
