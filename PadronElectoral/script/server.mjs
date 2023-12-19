@@ -1,15 +1,22 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const multer = require('multer');
-const cors = require('cors');
-const mysql = require('mysql');
-require('dotenv').config();
+import express from 'express';
+import bodyParser from 'body-parser';
+import multer from 'multer';
+import mysql from 'mysql';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = 3000;
 
-app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 const db = mysql.createConnection({
     host: '127.0.0.1',
@@ -17,6 +24,11 @@ const db = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     database: 'padronElectoral',
     port: 3306
+});
+
+db.connect((err) => {
+    if (err) throw err;
+    console.log('MySQL Connected...');
 });
 
 const storage = multer.diskStorage({
@@ -28,6 +40,8 @@ const storage = multer.diskStorage({
     }
 });
 
+const upload = multer({ storage: storage });
+
 app.post('/register', upload.single('image'), (req, res) => {
     try {
         const fname = req.body.fname;
@@ -36,8 +50,6 @@ app.post('/register', upload.single('image'), (req, res) => {
         const location = req.body.location;
         const image = req.file.path;
 
-        // Assuming you have a MySQL database connection (as in your original code)
-        // Insert the form data into the database
         let sql = `INSERT INTO voters (fname, gender, age, location, image) VALUES (?, ?, ?, ?, ?)`;
         let query = db.query(sql, [fname, gender, age, location, image], (err, result) => {
             if (err) throw err;
