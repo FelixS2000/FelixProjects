@@ -61,6 +61,16 @@ app.post('/register', upload.single('image'), (req, res) => {
     }
 });
 
+app.get('/getFormData', (req, res) => {
+    // Replace the following sample data with your actual data retrieval logic
+    const formData = {
+        title: 'Dynamic Form Title', // Get this from your server or database
+        content: '<p>This is the dynamic content for the form.</p>' // Get this from your server or database
+    };
+
+    res.json(formData);
+});
+
 app.listen(port, () => {
     console.log(`Server is running at port ${port}`);
 });
