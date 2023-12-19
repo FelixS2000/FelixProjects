@@ -1,0 +1,14 @@
+/* Add some padding and a black background color to feed */
+.feed {
+    padding: 20px;
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Style the feed images */
+.feed img {
+    width: 100%;
+    height: auto;
+}
