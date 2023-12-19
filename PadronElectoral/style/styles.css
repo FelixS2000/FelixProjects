@@ -5,7 +5,7 @@ h2 {
 }
 
 form {
-    display: inline-block;
+    display: contents;
     width: 50%;
     margin: 20px auto;
     padding: 20px;
