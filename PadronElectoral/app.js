@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('https://felixc2000.github.io/FelixProjects/PadronElectoral/addVoters/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + 'https://felixc2000.github.io/FelixProjects/PadronElectoral/');
 });
 
 app.post('/addVoter', (req, res) => {
