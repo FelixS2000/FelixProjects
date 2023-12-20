@@ -1,58 +1,66 @@
-document.addEventListener('DOMContentLoaded', function () {
-    let voterListContainer = document.getElementById('voter-list-container');
-    const registrationForm = document.getElementById('registration-form');
+const express = require('express');
+const mysql = require('mysql');
 
-    // Fetch voters from the API
-    fetch('/api/voters')
-        .then(response => response.json())
-        .then(data => {
-            // Render voter list
-            data.forEach(voter => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <strong>${voter.nombre}</strong> -
-                    Cédula: ${voter.cedula} -
-                    Pasaporte: ${voter.pasaporte} -
-                    ${voter.habilitado ? 'Habilitado para votar' : 'No habilitado para votar'}
-                `;
-                voterListContainer.appendChild(listItem);
-            });
-        })
-        .catch(error => console.error('Error fetching voters:', error));
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-    // Register a new voter
-    window.registrarVotante = function () {
-        const nombre = document.getElementById('nombre').value;
-        const cedula = document.getElementById('cedula').value;
-        const pasaporte = document.getElementById('pasaporte').value;
-        const habilitado = document.getElementById('habilitado').checked;
+// Create a MySQL connection pool
+const pool = mysql.createPool({
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'Felix1729!2020',
+    database: 'padronelectoral',
+    port: 3306,
+});
 
-        // Send data to the server
-        fetch('/api/voters', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ nombre, cedula, pasaporte, habilitado }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Refresh the voter list after registration
-            voterListContainer.innerHTML = '';
-            data.forEach(voter => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <strong>${voter.nombre}</strong> -
-                    Cédula: ${voter.cedula} -
-                    Pasaporte: ${voter.pasaporte} -
-                    ${voter.habilitado ? 'Habilitado para votar' : 'No habilitado para votar'}
-                `;
-                voterListContainer.appendChild(listItem);
-            });
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-            // Clear the registration form
-            registrationForm.reset();
-        })
-        .catch(error => console.error('Error registering voter:', error));
-    };
+app.use(express.static('public')); // Assuming your HTML file is in a 'public' folder
+
+app.get('/', (req, res) => {
+    res.sendFile('index.html');
+});
+
+// Fetch voters from the API
+app.get('/api/voters', (req, res) => {
+    pool.query('SELECT * FROM voters', (error, results) => {
+        if (error) {
+            console.error('Error fetching voters:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+// Register a new voter
+app.post('/api/voters', (req, res) => {
+    const { nombre, cedula, pasaporte, habilitado } = req.body;
+
+    // Assuming you have a 'voters' table with columns 'nombre', 'cedula', 'pasaporte', 'habilitado'
+    pool.query(
+        'INSERT INTO voters (nombre, cedula, pasaporte, habilitado) VALUES (?, ?, ?, ?)',
+        [nombre, cedula, pasaporte, habilitado],
+        (error, results) => {
+            if (error) {
+                console.error('Error registering voter:', error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            } else {
+                // Fetch updated voter list
+                pool.query('SELECT * FROM voters', (error, updatedResults) => {
+                    if (error) {
+                        console.error('Error fetching voters after registration:', error);
+                        res.status(500).json({ error: 'Internal Server Error' });
+                    } else {
+                        res.json(updatedResults);
+                    }
+                });
+            }
+        }
+    );
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
