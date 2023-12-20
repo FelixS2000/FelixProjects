@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template
 import mysql.connector
 
 app = Flask(__name__)
@@ -29,23 +29,17 @@ CREATE TABLE IF NOT EXISTS voters (
 cursor.execute(create_table_query)
 conn.commit()
 
-# Close the database connection
-cursor.close()
-conn.close()
+# Read and execute the padronelectoral.sql file
+with open('padronelectoral.sql', 'r') as sql_file:
+    sql_script = sql_file.read()
+    cursor.execute(sql_script)
+    conn.commit()
 
 # Route to display the list of voters
 @app.route('/')
 def index():
-    conn = mysql.connector.connect(**db_config)
-    cursor = conn.cursor(dictionary=True)
-    
-    # Fetch all voters from the database
     cursor.execute("SELECT * FROM voters")
     voters = cursor.fetchall()
-    
-    # Close the database connection
-    cursor.close()
-    conn.close()
     
     return render_template('index.html', voters=voters)
 
