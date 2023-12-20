@@ -3,34 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css">
     <title>Padron Electoral</title>
-    <link rel="stylesheet" href="./style/styles.css">
 </head>
-
 <body>
-
-<h2>Registro de Electores</h2>
-
-<form id="registroForm">
-    <label for="fname">Nombre Completo:</label><br>
-    <input type="text" id="fname" name="fname"><br>
-    <label for="gender">Género:</label><br>
-    <select id="gender" name="gender">
-        <option value="masculino">Masculino</option>
-        <option value="femenino">Femenino</option>
-    </select><br>
-    <label for="age">Edad:</label><br>
-    <input type="number" id="age" name="age"><br>
-    <label for="location">Ubicación:</label><br>
-    <input type="text" id="location" name="location"><br>
-    <label for="image">Imagen:</label><br>
-    <input type="file" id="image" name="image"><br>
-    <input type="submit" value="Registrar">
-</form>
-
-
+    <div class="container">
+        <h1>Padron Electoral</h1>
+        <div id="voter-list"></div>
+    </div>
+    <script src="scripts/app.js"></script>
 </body>
-<script src="script/registerForm.js"></script>
-<script src="script/server.mjs"></script>
 </html>
