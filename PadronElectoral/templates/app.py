@@ -14,6 +14,14 @@ db_config = {
 
 # ... (rest of your Flask application code)
 
+# Route to display the list of voters
+@app.route('/')
+def index():
+    cursor.execute("SELECT * FROM voters")
+    voters = cursor.fetchall()
+
+    return render_template('index.html', voters=voters)
+
 # Run the Flask application
 if __name__ == '__main__':
     app.run(debug=True)
