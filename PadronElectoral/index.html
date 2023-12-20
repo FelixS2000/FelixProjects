@@ -1,45 +1,35 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css">
-    <title>El Padrón Electoral</title>
+    <title>Voter Registry</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/scripts/app.py">
 </head>
 <body>
-    <header>
-        <h1>El Padrón Electoral</h1>
-        <p>Registro oficial de personas habilitadas para votar en República Dominicana</p>
-    </header>
-    
-    <main>
-        <section id="voter-form">
-            <h2>Registrar Nuevo Votante</h2>
-            <form id="registration-form">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" required>
-
-                <label for="cedula">Cédula de Identidad:</label>
-                <input type="text" id="cedula" required>
-
-                <label for="pasaporte">Pasaporte:</label>
-                <input type="text" id="pasaporte">
-
-                <label for="habilitado">Habilitado para votar:</label>
-                <input type="checkbox" id="habilitado">
-
-                <button type="button" onclick="registrarVotante()">Registrar</button>
-            </form>
-        </section>
-
-        <section id="voter-list">
-            <h2>Listado de Votantes</h2>
-            <ul id="voter-list-container">
-                <!-- Voter list will be dynamically added here -->
-            </ul>
-        </section>
-    </main>
-
-    <script src="scripts/script.js"></script>
+    <h1>Voter Registry</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for voter in voters %}
+                <tr>
+                    <td>{{ voter.id }}</td>
+                    <td>{{ voter.fname }}</td>
+                    <td>{{ 'Male' if voter.gender == 'm' else 'Female' }}</td>
+                    <td>{{ voter.age }}</td>
+                    <td>{{ voter.location }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
