@@ -1,5 +1,6 @@
 from flask import Flask, render_template, g
 import mysql.connector
+import os
 
 app = Flask(__name__)
 
@@ -43,10 +44,14 @@ with app.app_context():
     get_db().commit()
 
     # Read and execute the padronelectoral.sql file
-    with open('padronelectoral.sql', 'r') as sql_file:
-        sql_script = sql_file.read()
-        cursor.execute(sql_script)
+    try:
+        script_path = os.path.join(os.path.dirname(__file__), 'padronelectoral.sql')
+        with open(script_path, 'r') as sql_file:
+            sql_script = sql_file.read()
+            cursor.execute(sql_script)
         get_db().commit()
+    except Exception as e:
+        print(f"Error executing SQL script: {e}")
 
 # Route to display the list of voters
 @app.route('/')
