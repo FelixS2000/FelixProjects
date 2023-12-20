@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template
-from flask import CORS  # Only needed if your frontend is served from a different origin
+from flask_cors import CORS  # Only needed if your frontend is served from a different origin
 
 app = Flask(__name__)
 CORS(app)  # Only needed if your frontend is served from a different origin
