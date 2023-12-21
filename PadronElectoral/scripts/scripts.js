@@ -1,20 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Fetch voters from the server and populate the table
-    fetch("/api/getVoters")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Failed to fetch voters: ${response.status} ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            populateTable(data);
-        })
-        .catch(error => console.error("Error fetching voters:", error));
+    // Fetch voters from local storage and populate the table
+    const storedVoters = getStoredVoters();
+    populateTable(storedVoters);
 
     // Handle form submission
     const form = document.getElementById("voterForm");
-    form.addEventListener("submit", event => {
+    form.addEventListener("submit", (event) => {
         event.preventDefault();
         addVoter();
     });
@@ -27,9 +18,9 @@ function populateTable(voters) {
     tableBody.innerHTML = "";
 
     // Add table rows
-    voters.forEach(voter => {
+    voters.forEach((voter) => {
         const row = tableBody.insertRow();
-        Object.values(voter).forEach(value => {
+        Object.values(voter).forEach((value) => {
             const cell = row.insertCell();
             cell.textContent = value;
         });
@@ -40,19 +31,25 @@ function addVoter() {
     const form = document.getElementById("voterForm");
     const formData = new FormData(form);
 
-    fetch("/api/addVoter", {
-        method: "POST",
-        body: formData,
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Failed to add voter: ${response.status} ${response.statusText}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Refresh the table with the updated data
-        populateTable(data);
-    })
-    .catch(error => console.error("Error adding voter:", error));
+    // Convert FormData to a plain object
+    const voter = {};
+    formData.forEach((value, key) => {
+        voter[key] = value;
+    });
+
+    // Add the new voter to local storage
+    const storedVoters = getStoredVoters();
+    storedVoters.push(voter);
+    localStorage.setItem("voters", JSON.stringify(storedVoters));
+
+    // Refresh the table with the updated data
+    populateTable(storedVoters);
+
+    // Reset the form
+    form.reset();
+}
+
+function getStoredVoters() {
+    const storedVotersJSON = localStorage.getItem("voters");
+    return storedVotersJSON ? JSON.parse(storedVotersJSON) : [];
 }
