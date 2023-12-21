@@ -10,9 +10,38 @@
     <div class="container">
         <h1>Padron Electoral</h1>
         <table id="voterTable">
-            <!-- Table content will be populated using JavaScript -->
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cedula</th>
+                    <th>Habilitado</th>
+                    <th>Nombre</th>
+                    <th>Pasaporte</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table content will be populated using JavaScript -->
+            </tbody>
         </table>
+
+        <!-- Form to add a new voter -->
+        <form id="voterForm">
+            <label for="cedula">Cedula:</label>
+            <input type="text" id="cedula" name="cedula" required>
+
+            <label for="habilitado">Habilitado:</label>
+            <input type="checkbox" id="habilitado" name="habilitado">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="pasaporte">Pasaporte:</label>
+            <input type="text" id="pasaporte" name="pasaporte">
+
+            <button type="submit">Add Voter</button>
+        </form>
     </div>
+
     <script src="/PadronElectoral/scripts/scripts.js"></script>
 </body>
 </html>
