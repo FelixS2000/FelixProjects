@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Padron Electoral</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/PadronElectoral/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 </head>
 <body>
     <div class="container">
         <h1>Padron Electoral</h1>
+        <p id="currentDate"></p> <!-- Display current date -->
+
         <table id="voterTable">
             <thead>
                 <tr>
@@ -17,6 +20,7 @@
                     <th>Habilitado</th>
                     <th>Nombre</th>
                     <th>Pasaporte</th>
+                    <th>Género</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +41,13 @@
 
             <label for="pasaporte">Pasaporte:</label>
             <input type="text" id="pasaporte" name="pasaporte">
+
+            <label for="genero">Género:</label>
+            <select id="genero" name="genero">
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
 
             <button type="submit">Add Voter</button>
         </form>

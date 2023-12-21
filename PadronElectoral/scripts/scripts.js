@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const storedVoters = getStoredVoters();
     populateTable(storedVoters);
 
+    // Display current date
+    const currentDateElement = document.getElementById("currentDate");
+    currentDateElement.textContent = getCurrentDate();
+
     // Handle form submission
     const form = document.getElementById("voterForm");
     form.addEventListener("submit", (event) => {
@@ -52,4 +56,10 @@ function addVoter() {
 function getStoredVoters() {
     const storedVotersJSON = localStorage.getItem("voters");
     return storedVotersJSON ? JSON.parse(storedVotersJSON) : [];
+}
+
+function getCurrentDate() {
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return today.toLocaleDateString('en-US', options);
 }
