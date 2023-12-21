@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Fetch voters from the server and populate the table
     fetch("/api/getVoters")
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
             populateTable(data);
         })
-        .catch(error => console.error("Error fetching voters:", error));
+        .catch((error) => console.error("Error fetching voters:", error));
 
     // Handle form submission
     const form = document.getElementById("voterForm");
@@ -18,13 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
 function populateTable(voters) {
     const tableBody = document.querySelector("#voterTable tbody");
 
+    // Clear existing rows
+    tableBody.innerHTML = "";
+
     // Add table rows
-    voters.forEach(voter => {
+    voters.forEach((voter) => {
         const row = tableBody.insertRow();
-        for (const key in voter) {
+        Object.values(voter).forEach((value) => {
             const cell = row.insertCell();
-            cell.textContent = voter[key];
-        }
+            cell.textContent = value;
+        });
     });
 }
 
@@ -34,12 +37,12 @@ function addVoter() {
 
     fetch("/api/addVoter", {
         method: "POST",
-        body: formData
+        body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
         // Refresh the table with the updated data
         populateTable(data);
     })
-    .catch(error => console.error("Error adding voter:", error));
+    .catch((error) => console.error("Error adding voter:", error));
 }
