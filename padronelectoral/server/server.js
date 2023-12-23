@@ -37,6 +37,10 @@ app.post('/api/voters', (req, res) => {
   });
 });
 
+const voterRoutes = require('./api/voters');
+
+app.use('/api/voters', voterRoutes)
+
 // Start server
 const port = 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
