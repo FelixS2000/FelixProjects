@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Padron Electoral</title>
+</head>
+<body>
+
+  <h1>Padron Electoral</h1>
+  
+  <form id="add-voter-form">
+    <label>Cedula:</label>
+    <input type="text" id="cedula">
+    
+    <label>Nombre:</label>
+    <input type="text" id="nombre">
+    
+    <label>Genero:</label>
+    <select id="genero">
+      <option value="masculino">Masculino</option>
+      <option value="femenino">Femenino</option>
+    </select>
+    
+    <button type="submit">Agregar Votante</button>
+  </form>
+  
+  <table id="voter-table">
+    <tr>
+      <th>Cedula</th>
+      <th>Nombre</th>
+      <th>Genero</th>
+    </tr>
+  </table>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
