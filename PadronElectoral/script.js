@@ -1,5 +1,12 @@
-// Import settings
-import settings from './settings.json' 
+// script.js
+
+// Settings
+const db = {
+  host: "127.0.0.1",
+  user: "root",
+  password: "Felix1729!2020",  
+  name: "electoral"
+}
 
 // Get form element
 const form = document.getElementById('voterForm');
@@ -13,7 +20,7 @@ form.addEventListener('submit', e => {
   // Get form data
   const formData = new FormData(form);
 
-  // AJAX request to add_voter.php
+  // AJAX request
   fetch('add_voter.php', {
     method: 'POST',
     body: formData
@@ -21,7 +28,7 @@ form.addEventListener('submit', e => {
   .then(response => response.text())
   .then(data => {
     
-    // Redirect to register on success
+    // Redirect on success 
     window.location.href = 'register.php';
 
   })
@@ -31,8 +38,7 @@ form.addEventListener('submit', e => {
 
 });
 
-// Database settings from settings.json
-const db = settings.db;
+// Access settings
 const dbHost = db.host;
 const dbUser = db.user;
 const dbPass = db.password;
