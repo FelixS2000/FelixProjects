@@ -50,9 +50,9 @@ fetch('add_voter.php', {
 }) 
 .catch(error => {
   console.error('Error:', error);
-  
+
   // Show error message to user
-  document.getElementById('error').textContent = error;
-});
+  document.getElementById('error').textContent = error.message;
 })
+});
 });
