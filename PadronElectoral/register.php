@@ -38,13 +38,14 @@ $result = $conn->query($sql);
     </tr>
 
     <?php while($row = $result->fetch_assoc()): ?>
-      <tr>
-        <td><?php echo $row['id']; ?></td>
-        <td><?php echo $row['name']; ?></td>
-        <td><?php echo $row['age']; ?></td>
-        <td><?php echo $row['address']; ?></td>
-      </tr>
+    <tr>
+      <td><?php echo $row['id']; ?></td>
+      <td><?php echo $row['name']; ?></td>
+      <td><?php echo $row['age']; ?></td>
+      <td><?php echo $row['address']; ?></td>
+    </tr>
     <?php endwhile; ?>
+
 
   </table>
 
