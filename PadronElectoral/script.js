@@ -32,19 +32,27 @@ form.addEventListener('submit', e => {
   const formData = new FormData(form);
 
   // AJAX request
-  fetch('add_voter.php', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.text())
-  .then(data => {
-    
-    // Redirect on success
-    window.location.href = 'register.php';
+fetch('add_voter.php', {
+  method: 'POST',
+  body: formData  
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.text();
+})
+.then(data => {
 
-  })
-  .catch(error => {
-    console.error(error);
-  });
+  // Redirect on success
+  window.location.href = 'register.php';
+
+}) 
+.catch(error => {
+  console.error('Error:', error);
+  
+  // Show error message to user
+  document.getElementById('error').textContent = error;
+});
 })
 });
