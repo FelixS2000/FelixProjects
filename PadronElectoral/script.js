@@ -28,7 +28,7 @@ form.addEventListener("submit", (e) => {
   const photo = photoInput.value;
 
   // Send post to the database
-  fetch("register.php", {
+  fetch("add_voter.php", {
     method: "POST",
     body: formData,
   })
