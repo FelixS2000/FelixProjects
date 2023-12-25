@@ -46,7 +46,20 @@ form.addEventListener('submit', (e) => {
     }
   };
 
-  // Send request
-  xhr.send(formData);
+  // Send request 
+xhr.send(formData);
+
+// Handle response
+xhr.onreadystatechange = () => {
+  if(xhr.readyState === 4) {
+    if(xhr.status === 200) {
+      // Success
+      alert('Voter added successfully!');
+    } else {
+      // Handle error
+      console.error('Error adding voter');
+    }
+  }
+};
 
 });
