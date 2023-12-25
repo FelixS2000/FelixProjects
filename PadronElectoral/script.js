@@ -1,29 +1,24 @@
-// Get form element 
-const formElement = document.getElementById('voterForm');
+// Get form element
+const form = document.getElementById('voterForm');
 
-// Add submit event listener
-formElement.addEventListener('submit', (e) => {
+// Form submit handler
+form.addEventListener('submit', e => {
 
-  // Prevent default submission
+  // Prevent default submit
   e.preventDefault();
 
   // Get form data
-  const formData = new FormData(formElement);
+  const formData = new FormData(form);
 
-  // Append form data to body
-  const body = new URLSearchParams();
-  body.append('name', formData.get('name'));
-  body.append('age', formData.get('age'));
-  body.append('address', formData.get('address'));
-
-  // Send POST request
+  // AJAX request to add_voter.php
   fetch('add_voter.php', {
     method: 'POST',
-    body: body
+    body: formData
   })
   .then(response => response.text())
   .then(data => {
-    alert(data);
+    // Redirect to register on success
+    window.location.href = 'register.php';
   })
   .catch(error => {
     console.error(error);
