@@ -23,7 +23,21 @@ def register_voter():
   connection.commit()
   connection.close()
 
-  return jsonify(voter)
+  return jsonify({
+  'id': voter_id,
+  'name': name, 
+  'age': age,
+  'address': address,
+  'photo': photo
+})
+
+def send_file():
+  pass
+
+@app.route('/') 
+def index():
+  return send_file('index.html')
+
 
 if __name__ == '__main__':
   app.run()
