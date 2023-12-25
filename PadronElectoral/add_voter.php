@@ -15,7 +15,7 @@ $photo = addslashes(file_get_contents($_FILES['photo']['tmp_name']));
 $sql = "INSERT INTO voters (name, age, address, photo) VALUES ('$name', '$age', '$address', '$photo')";
 
 if ($conn->query($sql) === TRUE) {
-  header("Location: register.php");
+  header("Location: add_voter.php");
   exit();
 } else {
   echo "Error adding voter: " . $conn->error;
