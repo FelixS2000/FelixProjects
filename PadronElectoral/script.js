@@ -1,14 +1,14 @@
-// Get form element
-const form = document.getElementById('voterForm');
+// Get form element 
+const formElement = document.getElementById('voterForm');
 
 // Add submit event listener
-form.addEventListener('submit', (e) => {
+formElement.addEventListener('submit', (e) => {
 
   // Prevent default submission
   e.preventDefault();
 
   // Get form data
-  const formData = new FormData(form);
+  const formData = new FormData(formElement);
 
   // Append form data to body
   const body = new URLSearchParams();
@@ -21,12 +21,12 @@ form.addEventListener('submit', (e) => {
     method: 'POST',
     body: body
   })
-  .then(response => response.text()) 
+  .then(response => response.text())
   .then(data => {
     alert(data);
   })
   .catch(error => {
-    console.error(error);  
+    console.error(error);
   });
 
 });
