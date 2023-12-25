@@ -5,6 +5,9 @@ $user = "root";
 $password = "Felix1729!2020";
 $dbname = "electoral";
 
+// Load settings 
+$settings = json_decode(file_get_contents('settings.json'), true);
+
 $conn = new mysqli($host, $user, $password, $dbname);
 
 $sql = "SELECT * FROM voters";
