@@ -1,58 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Padron Electoral</title>
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="shortcut icon" type="image/x-icon" href="/PadronElectoral/favicon.ico"/>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padron Electoral</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
 <body>
-    <div class="container">
-        <h1>Padron Electoral</h1>
-        <p id="currentDate"></p> <!-- Display current date -->
+    <h1>Padrón Electoral</h1>
+  
+  <form id="voter-form">
+    <label for="full-name">Nombre completo:</label><br>
+    <input type="text" id="full-name" name="full-name"><br>
 
-        <table id="voterTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Cedula</th>
-                    <th>Habilitado</th>
-                    <th>Nombre</th>
-                    <th>Género</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Table content will be populated using JavaScript -->
-            </tbody>
-        </table>
+    <label for="gender">Género:</label><br>
+    <select id="gender" name="gender">
+      <option value="male">Masculino</option>
+      <option value="female">Femenino</option>
+    </select><br>
 
-        <!-- Form to add a new voter -->
-        <form id="voterForm">
-            <label for="cedula">Cedula:</label>
-            <input type="text" id="cedula" name="cedula" required>
+    <label for="birthdate">Fecha de nacimiento:</label><br>
+    <input type="date" id="birthdate" name="birthdate"><br>
 
-            <label for="habilitado">Habilitado:</label>
-            <input type="checkbox" id="habilitado" name="habilitado">
+    <label for="cedula">Cédula:</label><br>
+    <input type="text" id="cedula" name="cedula"><br>
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+    <label for="image">Imagen:</label><br>
+    <input type="file" id="image" name="image"><br>
 
-            <label for="pasaporte">Pasaporte:</label>
-            <input type="text" id="pasaporte" name="pasaporte">
+    <button type="submit">Enviar</button>
+  </form>
 
-            <label for="genero">Género:</label>
-            <select id="genero" name="genero">
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Otro</option>
-            </select>
+  <div id="voter-info"></div>
+  <script>
+    // Connect to MySQL database
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host: '127.0.0.1',
+  user: 'root',
+  password: 'Felix1729!2020',
+  database: 'padronelectoral'
+});
 
-            <button type="submit">Add Voter</button>
-        </form>
-    </div>
+// Submit form
+const form = document.getElementById('voter-form');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-    <script src="scripts/scripts.js"></script>
+  // Get form data
+  const fullName = form.elements['full-name'].value;
+  const gender = form.elements['gender'].value;
+  const birthdate = form.elements['birthdate'].value;
+  const cedula = form.elements['cedula'].value;
+  const image = form.elements['image'].files[0];
+
+  // Insert voter into database
+  connection.query('INSERT INTO voters SET ?', {
+    cedula,
+    habilitado: true,
+    nombre: fullName,
+    fecha_nacimiento: birthdate,
+    genero: gender,
+    foto: image
+  }, (error, results) => {
+    if (error) throw error;
+
+    // Display confirmation
+    document.getElementById('voter-info').innerHTML = `
+      <p>Voter ${fullName} added successfully with cédula ${cedula}.</p>
+    `;
+
+    // Clear form
+    form.reset();
+  });
+
+});
+
+// Display voters
+connection.query('SELECT * FROM voters', (error, results) => {
+  if (error) throw error;
+
+  let voterInfo = '<h2>Voters</h2>';
+  results.forEach(voter => {
+    voterInfo += `
+      <div>
+        <p>Name: ${voter.nombre}</p>
+        <p>Cédula: ${voter.cedula}</p>
+        <img src="/uploads/${voter.foto}" alt="Voter photo">
+      </div>
+    `;
+  });
+
+  document.getElementById('voter-info').innerHTML = voterInfo;
+});
+  </script>
+  <script src="script/scripts.js"></script>
 </body>
 </html>
-
