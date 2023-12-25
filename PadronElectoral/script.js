@@ -23,23 +23,50 @@ form.addEventListener("submit", (e) => {
   formData.append("address", address);
   formData.append("photo", photo);
 
-  // Submit FormData to add_voter.php
-xhr.open('POST', '/add_voter.php');
-xhr.setRequestHeader('Content-Type', 'multipart/form-data'); 
+  // Declare xhr globally
+  const xhr = new XMLHttpRequest();
 
-xhr.onload = () => {
-  if(xhr.status === 200) {
-    window.location.href = '/register.php';
+
+  // Get form elements
+  const form = document.querySelector('form');
+
+  // Submit event handler
+  form.addEventListener('submit', (e) => {
+
+  // Prevent default submit
+  e.preventDefault();
+
+  // Create FormData
+  const formData = new FormData();
+
+  // Open xhr request
+  xhr.open('POST', '/add_voter.php');
+
+  // Set content type header
+  xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+
+  // Handle load
+  xhr.onload = () => {
+    if(xhr.status === 200){
+      window.location.href = '/register.php';
+    }
+  };
+
+  // Handle errors
+  xhr.onerror = () => {
+    console.error('Request Failed');
+  };
+
+  if(xhr.status !== 200){
+    console.error('Error', xhr.statusText);
   }
-};
 
-xhr.onerror = () => {
-  console.error('Request Failed'); 
-};
-
-if(xhr.status !== 200) {
-  console.error('Error', xhr.statusText); 
-}
-
-xhr.send(formData);
-});
+  // Send request
+  xhr.send(formData);
+  });
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4 && xhr.status === 200) {
+      // Success
+    }
+  };
+}); 
