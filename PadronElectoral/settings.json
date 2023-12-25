@@ -3,13 +3,13 @@
         {
             "mysqlOptions": {
                 "authProtocol": "default",
-                "enableSsl": "Disabled"
+                "enableSsl": "enableSsl"
             },
             "previewLimit": 50,
             "server": "127.0.0.1",
             "port": 3306,
             "driver": "MySQL",
-            "name": "felix",
+            "name": "padronelectoral",
             "database": "padronelectoral",
             "username": "root"
         }
