@@ -15,6 +15,16 @@ form.addEventListener('submit', (e) => {
 
   // Open request
   xhr.open('POST', 'add_voter.php');
+  // Send data on completion
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      alert(`Votre vote a bien été enregistré !`);
+      window.location.href='index.html';
+      } else {
+        console.error(`Error: ${xhr.status}`);
+        }
+        };
+        
 
   // Attach handlers 
   xhr.onload = () => {
