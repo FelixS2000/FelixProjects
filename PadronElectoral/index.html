@@ -7,7 +7,7 @@
 <body>
   <h1>Add Voter</h1>
   
-  <form method="post" enctype="multipart/form-data">
+  <form action="add_voter.php" method="post" enctype="multipart/form-data">
     <label>Name:</label>
     <input type="text" name="name"><br><br>
     
@@ -22,35 +22,6 @@
     
     <input type="submit" value="Submit">
   </form>
-  <?php
-
-$host = "localhost"; 
-$user = "root";
-$password = "Felix1729!2020";
-$dbname = "electoral";
-
-$conn = new mysqli($host, $user, $password, $dbname);
-
-$name = $_POST['name'];
-$age = $_POST['age'];
-$address = $_POST['address'];
-$photo = addslashes(file_get_contents($_FILES['photo']['tmp_name']));
-
-$sql = "INSERT INTO voters (name, age, address, photo) VALUES ('$name', '$age', '$address', '$photo')";
-
-if ($conn->query($sql) === TRUE) {
-  header("Location: register.php");
-  exit();
-} else {
-  echo "Error adding voter: " . $conn->error;
-}
-if ($conn->query($sql) === FALSE) {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
-
-?>
 </body>
 <script src="script.js"></script>
 </html>
