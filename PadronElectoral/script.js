@@ -7,7 +7,7 @@ const db = {
 };
 
 // Fetch settings
-fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json')
+fetch('https://raw.githubusercontent.com/felixc2000/FelixProjects/master/PadronElectoral/settings.json') 
 .then(response => response.json())  
 .then(data => {
 
