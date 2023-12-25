@@ -1,26 +1,29 @@
-<!-- register.html -->
+<?php
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Register</title>
-</head>
-<body>
-  <form method="POST" enctype="multipart/form-data">
-    <label>Name:</label><br>
-    <input type="text" name="name"><br><br>
-    
-    <label>Age:</label><br>  
-    <input type="number" name="age"><br><br>
+$host = "localhost"; 
+$user = "root";
+$password = "Felix1729!2020";
+$dbname = "electoral";
 
-    <label>Address:</label><br>
-    <input type="text" name="address"><br><br>
-    
-    <label>Photo:</label><br>
-    <input type="file" name="photo"><br><br>
+$conn = new mysqli($host, $user, $password, $dbname);
 
-    <input type="submit" value="Register">
-  </form>
-</body>
-<script src="script.js"></script>
-</html>
+$name = $_POST['name'];
+$age = $_POST['age'];
+$address = $_POST['address'];
+$photo = addslashes(file_get_contents($_FILES['photo']['tmp_name']));
+
+$sql = "INSERT INTO voters (name, age, address, photo) VALUES ('$name', '$age', '$address', '$photo')";
+
+if ($conn->query($sql) === TRUE) {
+  header("Location: register.php");
+  exit();
+} else {
+  echo "Error adding voter: " . $conn->error;
+}
+if ($conn->query($sql) === FALSE) {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+
+?>
