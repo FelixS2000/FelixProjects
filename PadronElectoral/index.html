@@ -43,9 +43,10 @@ const connection = mysql.createConnection({
   database: 'padronelectoral'
 });
 
-// Submit form
+// Submit form 
 const form = document.getElementById('voter-form');
 form.addEventListener('submit', (e) => {
+
   e.preventDefault();
 
   // Get form data
@@ -57,20 +58,20 @@ form.addEventListener('submit', (e) => {
 
   // Insert voter into database
   connection.query('INSERT INTO voters SET ?', {
-    cedula,
+    cedula, 
     habilitado: true,
     nombre: fullName,
-    fecha_nacimiento: birthdate,
+    fecha_nacimiento: birthdate, 
     genero: gender,
     foto: image
   }, (error, results) => {
     if (error) throw error;
 
-    // Display confirmation
+    // Display confirmation 
     document.getElementById('voter-info').innerHTML = `
       <p>Voter ${fullName} added successfully with cédula ${cedula}.</p>
     `;
-
+    
     // Clear form
     form.reset();
   });
@@ -94,7 +95,15 @@ connection.query('SELECT * FROM voters', (error, results) => {
 
   document.getElementById('voter-info').innerHTML = voterInfo;
 });
+
   </script>
-  <script src="server.js"></script>
+  <script>
+    // Import Flask app
+    import app from './app.py';
+    
+    // Initialize Flask app
+    const flaskApp = initFlaskApp(app);
+  </script>
+  
 </body>
 </html>
