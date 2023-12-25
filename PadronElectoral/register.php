@@ -1,16 +1,21 @@
 <?php
 
-$host = "localhost";
-$user = "root"; 
-$password = "Felix1729!2020";
+// Connect to the database
+$dbhost = "127.0.0.1";
+$dbuser = "root";
+$dbpass = "Felix1729!2020";
 $dbname = "electoral";
 
-// Load settings 
-$settings = json_decode(file_get_contents('settings.json'), true);
+$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
-$conn = new mysqli($host, $user, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+} 
 
-$sql = "SELECT * FROM voters";
+// Select voters query 
+$sql = "SELECT id, name, age, address FROM voters";
+
 $result = $conn->query($sql);
 
 ?>
@@ -21,36 +26,27 @@ $result = $conn->query($sql);
   <title>Voter Register</title>
 </head>
 <body>
+
   <h1>Voter Register</h1>
   
-  <?php if ($result->num_rows > 0) { ?>
-  
-    <table>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Address</th>
+    </tr>
+
+    <?php while($row = $result->fetch_assoc()): ?>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Address</th>
-        <th>Photo</th>
+        <td><?php echo $row['id']; ?></td>
+        <td><?php echo $row['name']; ?></td>
+        <td><?php echo $row['age']; ?></td>
+        <td><?php echo $row['address']; ?></td>
       </tr>
-      
-      <?php while($row = $result->fetch_assoc()) { ?>
-      
-        <tr>
-          <td><?php echo $row['id']; ?></td>
-          <td><?php echo $row['name']; ?></td>
-          <td><?php echo $row['age']; ?></td>
-          <td><?php echo $row['address']; ?></td>
-          <td><img src="data:image/jpg;base64,<?php echo base64_encode($row['photo']); ?>" width="100"></td>
-        </tr>
-        
-      <?php } ?>
-      
-    </table>
-    
-  <?php } else { ?>
-    <p>No voters found</p>
-  <?php } ?>
-  
+    <?php endwhile; ?>
+
+  </table>
+
 </body>
 </html>
