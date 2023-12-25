@@ -1,23 +1,34 @@
-// script.js
-
-// Settings
+// Hardcoded DB settings
 const db = {
-  host: "127.0.0.1",
+  host: "localhost",
   user: "root",
-  password: "Felix1729!2020",  
+  password: "Felix1729!2020",
   name: "electoral"
-}
+};
 
-// Get form element
-const form = document.getElementById('voterForm');
+// Fetch settings
+fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json')
+.then(response => response.json())  
+.then(data => {
 
-// Form submit handler
+  // Override if exists in JSON
+  if(data.db) {
+    db.host = data.db.host || db.host;
+    db.user = data.db.user || db.user;
+    db.password = data.db.password || db.password;
+    db.name = data.db.name || db.name;
+  }
+
+
+  // Get form element
+  const form = document.getElementById('voterForm');
+
+  // Form submit handler
 form.addEventListener('submit', e => {
 
-  // Prevent default submit
-  e.preventDefault();
-
-  // Get form data
+    e.preventDefault();
+    
+    // Get form data
   const formData = new FormData(form);
 
   // AJAX request
@@ -28,18 +39,12 @@ form.addEventListener('submit', e => {
   .then(response => response.text())
   .then(data => {
     
-    // Redirect on success 
+    // Redirect on success
     window.location.href = 'register.php';
 
   })
   .catch(error => {
     console.error(error);
   });
-
+})
 });
-
-// Access settings
-const dbHost = db.host;
-const dbUser = db.user;
-const dbPass = db.password;
-const dbName = db.name;
