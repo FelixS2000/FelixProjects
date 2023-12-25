@@ -1,45 +1,32 @@
 // Get form element
 const form = document.getElementById('voterForm');
 
-
-
-
-// Get form element
-const form = document.getElementById('voterForm');
-
-// Get name input element 
-const nameInput = form.elements.name;
-const ageInput = form.elements.age;
-const addressInput = form.elements.address;
-const photoInput = form.elements.photo;
-
 // Add submit event listener
-form.addEventListener("submit", (e) => {
+form.addEventListener('submit', (e) => {
+
   // Prevent default submission
   e.preventDefault();
 
   // Get form data
   const formData = new FormData(form);
 
-  // Get name value
-  const name = nameInput.value;
-  const age = ageInput.value;
-  const address = addressInput.value;
-  const photo = photoInput.value;
+  // Append form data to body
+  const body = new URLSearchParams();
+  body.append('name', formData.get('name'));
+  body.append('age', formData.get('age'));
+  body.append('address', formData.get('address'));
 
-  // Send post to the database
-  fetch("add_voter.php", {
-    method: "POST",
-    body: formData,
+  // Send POST request
+  fetch('add_voter.php', {
+    method: 'POST',
+    body: body
   })
-    .then((response) => response.json())
-    .catch((error) => console.log("Error:", error))
-    .then((result) => {
-      if (!result) {
-        alert("Registration Failed");
-      } else {
-        alert(`Welcome ${result}`);
-        window.location.href = "index.html";
-      }
-    });
+  .then(response => response.text()) 
+  .then(data => {
+    alert(data);
+  })
+  .catch(error => {
+    console.error(error);  
+  });
+
 });
