@@ -1,57 +1,39 @@
-// script.js
+// Get form and input elements
+const form = document.querySelector('form');
+const nameInput = document.querySelector('input[name="name"]');
+const ageInput = document.querySelector('input[name="age"]');
+const addressInput = document.querySelector('input[name="address"]');
+const photoInput = document.querySelector('input[name="photo"]');
 
-const form = document.getElementById('registration-form');
-const table = document.getElementById('voter-table');
-
+// Add submit event listener 
 form.addEventListener('submit', (e) => {
+
+  // Prevent default form submit
   e.preventDefault();
 
-  const name = form.name.value;
-  const age = form.age.value;
-  const address = form.address.value;
-  const photo = form.photo.files[0];
+  // Get values
+  const name = nameInput.value;
+  const age = ageInput.value;
+  const address = addressInput.value;
+  const photo = photoInput.files[0];
 
-  registerVoter(name, age, address, photo);
+  // Create FormData object
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('age', age); 
+  formData.append('address', address);
+  formData.append('photo', photo);
+
+  // Submit FormData object via XHR
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/register');
+  xhr.onload = () => {
+    // Redirect on success
+    if (xhr.status === 200) {
+      window.location.href = '/'; 
+    }
+  };
+
+  xhr.send(formData);
+
 });
-
-async function registerVoter(name, age, address, photo) {
-  // Send registration to server
-  const response = await fetch('/register', {
-    method: 'POST',
-    body: JSON.stringify({
-      name,
-      age,
-      address,
-      photo
-    })
-  });
-
-  // Add new row to table
-  const voter = await response.json();
-  addTableRow(voter);
-}
-
-function addTableRow(voter) {
-  const row = document.createElement('tr');
-
-  const photoCell = document.createElement('td');
-  const photoImg = document.createElement('img');
-  photoImg.src = voter.photo;
-  photoCell.appendChild(photoImg);
-
-  const nameCell = document.createElement('td');
-  nameCell.textContent = voter.name;
-
-  const ageCell = document.createElement('td');
-  ageCell.textContent = voter.age;
-
-  const addressCell = document.createElement('td');
-  addressCell.textContent = voter.address;
-
-  row.appendChild(photoCell);
-  row.appendChild(nameCell);
-  row.appendChild(ageCell);
-  row.appendChild(addressCell);
-
-  table.appendChild(row);
-}
