@@ -6,7 +6,7 @@ h1 {
   text-align: center; 
 }
 
-form {
+#voterForm {
   max-width: 500px;
   margin: 0 auto;
 }

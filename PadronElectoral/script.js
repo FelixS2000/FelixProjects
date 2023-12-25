@@ -1,14 +1,24 @@
-xhr.send(formData);
 // Get form elements
-const form = document.querySelector('form');
+const form = document.getElementById("voterForm");
 
 // Submit event handler
 form.addEventListener('submit', (e) => {
 
   e.preventDefault();
   
-  // Create FormData
-  const formData = new FormData(form);
+  
+
+  // Create form data
+  const formData = new FormData();
+
+  // Append form fields
+  formData.append('name', nameInput.value); 
+  formData.append('age', ageInput.value);
+  formData.append('address', addressInput.value);
+  formData.append('photo', photoInput.value);
+
+
+
 
   // XMLHttpRequest
   const xhr = new XMLHttpRequest();
@@ -24,15 +34,10 @@ form.addEventListener('submit', (e) => {
         console.error(`Error: ${xhr.status}`);
         }
         };
-        
-
-  // Attach handlers 
-  xhr.onload = () => {
-    // Success
-  };
 
   xhr.onerror = () => {
     // Error
+    console.error('An error occurred while submitting the form!');
   };
 
   // Handle response 
@@ -48,18 +53,5 @@ form.addEventListener('submit', (e) => {
 
   // Send request 
 xhr.send(formData);
-
-// Handle response
-xhr.onreadystatechange = () => {
-  if(xhr.readyState === 4) {
-    if(xhr.status === 200) {
-      // Success
-      alert('Voter added successfully!');
-    } else {
-      // Handle error
-      console.error('Error adding voter');
-    }
-  }
-};
 
 });
