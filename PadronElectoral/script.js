@@ -2,8 +2,66 @@
 const form = document.getElementById('voterForm');
 const errorDiv = document.getElementById('error');
 
+// Add submitted data div
+const resultsDiv = document.createElement('div');
+resultsDiv.id = 'results';
+document.body.appendChild(resultsDiv);
+
+
 // Form submit handler
 form.addEventListener('submit', (e) => {
+
+  e.preventDefault();
+
+  fetch('/submit-form', {
+    method: 'POST',
+    body: new FormData(form)
+  })
+    .then(response => response.json())
+    .then(data => {
+      displayResult(data);
+    });
+
+});
+
+
+function displayResult(data) {
+
+  resultsDiv.innerHTML = `
+    <h2>Submitted Data:</h2>
+    <p>
+      Name: ${data.name}<br>
+      Age: ${data.age}<br>
+      Gender: ${data.gender}<br>
+      Address: ${data.address}
+    </p>
+  `;
+
+  // Display image
+  const img = document.createElement('img');
+  img.src = data.photo;
+  resultsDiv.appendChild(img);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Prevent default submit
   e.preventDefault();
