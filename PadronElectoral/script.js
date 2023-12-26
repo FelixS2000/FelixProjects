@@ -9,7 +9,7 @@ document.body.appendChild(resultsDiv);
 
 
 // Form submit handler
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
 
   // Get form data
   const formData = new FormData(form);
@@ -41,7 +41,7 @@ form.addEventListener('submit', (e) => {
 });
 
 
-function displayResult(data) {
+async function displayResult(data) {
 
   resultsDiv.innerHTML = `
     <h2>Submitted Data:</h2>
@@ -57,6 +57,5 @@ function displayResult(data) {
   const img = document.createElement('img');
   img.src = data.photo;
   resultsDiv.appendChild(img);
-
+  displayResult(data);
 }
-displayResult(data);
