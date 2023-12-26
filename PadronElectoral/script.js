@@ -32,8 +32,8 @@ form.addEventListener('submit', e => {
   const formData = new FormData(form);
 
   // AJAX request
-fetch("add_voter.php", {
-  method: "POST",
+fetch("https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php", {
+  method: "GET",
   body: formData  
 })
 .then(response => {
