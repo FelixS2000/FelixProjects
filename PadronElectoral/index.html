@@ -22,6 +22,7 @@
       <option value="female">Female</option>
       <option value="other">Other</option>
     </select>
+    <br>
 
     <label>Address:</label>
     <input type="text" name="address">
@@ -66,17 +67,23 @@
 
 
       // Handle photo 
+      
       let photoUrl;
-      if (photo && photo.files.length > 0) {
+
+      if (photo?.files?.length > 0) {
         const photoFile = photo.files[0];
 
         const reader = new FileReader();
         reader.onload = () => {
-          photoUrl = reader.result; 
+          photoUrl = reader.result;
         };
         reader.readAsDataURL(photoFile);
 
-      }
+      } 
+
+
+
+
 
       // Display result
       resultDiv.innerHTML = `
