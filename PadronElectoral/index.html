@@ -66,36 +66,37 @@
       }
 
 
-      // Handle photo 
-      
-      let photoUrl;
 
-      if (photo?.files?.length > 0) {
-        const photoFile = photo.files[0];
-
+        // Handle photo
         const reader = new FileReader();
         reader.onload = () => {
-          photoUrl = reader.result;
+
+          let photoUrl = reader.result;
+
+          // Display result
+          resultDiv.innerHTML = `
+            <h3>Voter Information</h3>
+            
+            ${photoUrl ? `<img src="${photoUrl}" alt="Voter Photo">` : ''}
+
+            <p>Name: ${name}</p>
+            <p>Age: ${age}</p>
+            <p>Gender: ${gender}</p>
+            <p>Address: ${address}</p>
+          `;
+          
+
         };
-        reader.readAsDataURL(photoFile);
 
-      } 
+        if (photo?.files?.length > 0) {
+          const photoFile = photo.files[0];
+          reader.readAsDataURL(photoFile);
+        }
 
 
 
 
 
-      // Display result
-      resultDiv.innerHTML = `
-        <h3>Voter Information</h3>
-
-        ${photoUrl ? `<img src="${photoUrl}" alt="Voter Photo">` : ''}
-
-        <p>Name: ${name}</p>
-        <p>Age: ${age}</p>
-        <p>Gender: ${gender}</p>
-        <p>Address: ${address}</p>
-      `;
 
       
 
