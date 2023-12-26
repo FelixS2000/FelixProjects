@@ -1,46 +1,44 @@
-// Select elements  
-const form = document.getElementById('voterForm');
-const resultDiv = document.getElementById('result');
+const voterForm = document.getElementById('voterForm');
+    const resultDiv = document.getElementById('result');
+    const errorFooter = document.getElementById('error');
 
-// Form submit handler
-form.addEventListener('submit', async (e) => {
+    voterForm.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent form submission
 
-  e.preventDefault();
+      const formData = new FormData(voterForm);
+      const name = formData.get('name');
+      const age = formData.get('age');
+      const gender = formData.get('gender');
+      const address = formData.get('address');
+      const photo = formData.get('photo');
 
-  // Get form data
-  const formData = new FormData(form);
+      // Basic validation
+      let errors = [];
+      if (!name) errors.push('Name is required');
+      if (!age) errors.push('Age is required');
+      if (!gender) errors.push('Gender is required');
+      if (!address) errors.push('Address is required');
 
-  // Submit form data
-  const response = await fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/api/voters.html', {
-    method: 'POST',
-    body: formData
-  });
+      if (errors.length > 0) {
+        errorFooter.textContent = errors.join(', ');
+        return;
+      }
 
-  // Handle response
-  if(response.ok) {
-    const data = await response.json();
-    displayResult(data); 
-  } else {
-    console.error('Error submitting form');
-  }
 
-});
 
-// Display result  
-function displayResult(data) {
 
-  resultDiv.innerHTML = `
-    <h3>Submitted Data:</h3>
-    <p>
-      Name: ${data.name}<br>
-      Age: ${data.age}<br>
-      Gender: ${data.gender}<br>
-      Address: ${data.address} 
-    </p>
-  `;
 
-  const img = document.createElement('img');
-  img.src = data.photo;
-  resultDiv.appendChild(img);
+      // Display result
+      resultDiv.innerHTML = `
+        <h3>Voter Information</h3>
 
-}
+        
+        <p>Name: ${name}</p>
+        <p>Age: ${age}</p>
+        <p>Gender: ${gender}</p>
+        <p>Address: ${address}</p>
+      `;
+
+      
+
+      });

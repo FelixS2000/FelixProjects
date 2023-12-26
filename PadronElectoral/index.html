@@ -22,7 +22,7 @@
       <option value="female">Female</option>
       <option value="other">Other</option>
     </select>
-    <br>
+    
 
     <label>Address:</label>
     <input type="text" name="address">
@@ -39,68 +39,7 @@
   <footer id="error"></footer>
 
   <script>
-    const voterForm = document.getElementById('voterForm');
-    const resultDiv = document.getElementById('result');
-    const errorFooter = document.getElementById('error');
-
-    voterForm.addEventListener('submit', (event) => {
-      event.preventDefault(); // Prevent form submission
-
-      const formData = new FormData(voterForm);
-      const name = formData.get('name');
-      const age = formData.get('age');
-      const gender = formData.get('gender');
-      const address = formData.get('address');
-      const photo = formData.get('photo');
-
-      // Basic validation
-      let errors = [];
-      if (!name) errors.push('Name is required');
-      if (!age) errors.push('Age is required');
-      if (!gender) errors.push('Gender is required');
-      if (!address) errors.push('Address is required');
-
-      if (errors.length > 0) {
-        errorFooter.textContent = errors.join(', ');
-        return;
-      }
-
-
-
-        // Handle photo
-        const reader = new FileReader();
-        reader.onload = () => {
-
-          let photoUrl = reader.result;
-
-          // Display result
-          resultDiv.innerHTML = `
-            <h3>Voter Information</h3>
-            
-            ${photoUrl ? `<img src="${photoUrl}" alt="Voter Photo">` : ''}
-
-            <p>Name: ${name}</p>
-            <p>Age: ${age}</p>
-            <p>Gender: ${gender}</p>
-            <p>Address: ${address}</p>
-          `;
-          
-
-        };
-
-        if (photo?.files?.length > 0) {
-          const photoFile = photo.files[0];
-          reader.readAsDataURL(photoFile);
-        }
-
-
-
-
-
-
-      
-
-      });
+    
   </script>
 </body>
 </html>
