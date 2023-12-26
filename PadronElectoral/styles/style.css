@@ -47,11 +47,27 @@ input[type="submit"]:hover {
 }
 
 /* Result styles */
+/* Result styles */
+
 #result {
-  background-color: #f2f2f2;
+  background-color: #f2f2f2; 
   padding: 20px;
   border-radius: 5px;
+  margin-top: 20px;
 }
+
+#result h3 {
+  margin-top: 0;
+}
+
+#result p {
+  margin-bottom: 10px;
+}
+
+#result p:last-child {
+  margin-bottom: 0;
+}
+
 
 /* Error message */
 #error {
