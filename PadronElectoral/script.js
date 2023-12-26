@@ -11,7 +11,7 @@ form.addEventListener('submit', async (e) => {
   const formData = new FormData(form);
 
   // Submit form data
-  const response = await fetch('/api/voters', {
+  const response = await fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/api/voters.html', {
     method: 'POST',
     body: formData
   });
