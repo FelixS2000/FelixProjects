@@ -64,8 +64,34 @@
         return;
       }
 
+      
+      // Existing code 
+
+      // Handle photo upload
+      const photoFile = photo.files[0];
+
+      if (photoFile) {
+
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+
+          const imgUrl = event.target.result;
+
+          const img = document.createElement('img');
+          img.src = imgUrl;
+          img.alt = 'Voter Photo';
+
+          resultDiv.appendChild(img);
+
+        };
+
+        reader.readAsDataURL(photoFile);
+
+      }
+
       // Display voter information
-      resultDiv.innerHTML = `
+      resultDiv.innerHTML += `
         <h3>Voter Information</h3>
         <p>Name: ${name}</p>
         <p>Age: ${age}</p>
@@ -73,29 +99,7 @@
         <p>Address: ${address}</p>
       `;
 
-      
-      // Handle photo upload
-const photoFile = photo.files[0]; 
 
-if (photoFile) {
-
-  const reader = new FileReader();
-
-  reader.onload = function(event) {
-
-    const imgUrl = event.target.result;
-
-    const img = document.createElement('img');
-    img.src = imgUrl;
-    img.alt = 'Voter Photo';
-
-    resultDiv.appendChild(img);
-
-  };
-
-  reader.readAsDataURL(photoFile);
-
-}
 
 
       });
