@@ -33,8 +33,7 @@ form.addEventListener('submit', e => {
 
   // AJAX request
 fetch("https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php", {
-  method: "GET",
-  body: formData  
+  method: "GET"
 })
 .then(response => {
   if (!response.ok) {
@@ -45,7 +44,7 @@ fetch("https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php"
 .then(data => {
 
   // Redirect on success
-  window.location.href = 'register.php';
+  window.location.href = 'https://felixc2000.github.io/FelixProjects/PadronElectoral/register.php';
 
 }) 
 .catch(error => {
