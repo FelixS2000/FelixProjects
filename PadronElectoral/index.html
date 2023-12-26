@@ -73,9 +73,22 @@
         <p>Address: ${address}</p>
       `;
 
-      // Handle photo upload (optional)
-      // You can process the photo using JavaScript or display a preview
-    });
+      
+      // Handle photo upload
+      const photoFile = photo.files[0]; // Get the uploaded photo file
+
+      if (photoFile) {
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+          const imgUrl = event.target.result; // URL of the loaded image
+          resultDiv.innerHTML += `<img src="${imgUrl}" alt="Voter Photo">`;
+        };
+
+        reader.readAsDataURL(photoFile); // Read the image file as a data URL
+      }
+
+      });
   </script>
 </body>
 </html>
