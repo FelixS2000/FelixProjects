@@ -35,12 +35,15 @@ voterForm.addEventListener('submit', (event) => {
 
   // Display result
   resultDiv.innerHTML = `
-    <h3>Voter Information</h3>
+  <h3>Voter Information</h3>
 
-    <p>Name: ${name}</p>
-    <p>Age: ${age}</p>
-    <p>Gender: ${gender}</p>
-    <p>Address: ${address}</p>
+  <img src="${URL.createObjectURL(photo)}">
+
+  <p>Name: ${name}</p>
+  <p>Age: ${age}</p>
+  <p>Gender: ${gender}</p>
+  <p>Address: ${address}</p>
   `;
+
 
 });
