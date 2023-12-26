@@ -4,7 +4,6 @@
   <title>Add Voter</title>
   <link rel="stylesheet" href="styles/style.css">
 </head>
-
 <body>
   <h1>Add Voter</h1>
 
@@ -43,7 +42,7 @@
     const resultDiv = document.getElementById('result');
     const errorFooter = document.getElementById('error');
 
-    voterForm.addEventListener('submit', async (event) => {
+    voterForm.addEventListener('submit', (event) => {
       event.preventDefault(); // Prevent form submission
 
       const formData = new FormData(voterForm);
@@ -66,44 +65,34 @@
       }
 
 
-      // Existing code 
+      // Handle photo 
+      let photoUrl;
+      if (photo && photo.files.length > 0) {
+        const photoFile = photo.files[0];
 
-      // Handle photo upload
-      const photoFile = photo.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+          photoUrl = reader.result; 
+        };
+        reader.readAsDataURL(photoFile);
 
-      if (photoFile) {
-        try {
-          const imgUrl = await new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(photoFile);
-          });
-
-          // Create and display the img element
-          const img = document.createElement('img');
-          img.src = imgUrl;
-          img.alt = 'Voter Photo';
-          resultDiv.appendChild(img);
-        } catch (error) {
-          // Handle errors during image processing
-          console.error('Error processing image:', error);
-          // Display an error message to the user if needed
-        }
       }
 
-      // Display voter information
-      resultDiv.innerHTML += `
+      // Display result
+      resultDiv.innerHTML = `
         <h3>Voter Information</h3>
+
+        ${photoUrl ? `<img src="${photoUrl}" alt="Voter Photo">` : ''}
+
         <p>Name: ${name}</p>
         <p>Age: ${age}</p>
         <p>Gender: ${gender}</p>
         <p>Address: ${address}</p>
       `;
 
-    });
-  </script>
-</body>
+      
 
+      });
+  </script>
 </body>
 </html>
