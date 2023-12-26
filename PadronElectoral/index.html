@@ -4,6 +4,7 @@
   <title>Add Voter</title>
   <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
   <h1>Add Voter</h1>
 
@@ -42,7 +43,7 @@
     const resultDiv = document.getElementById('result');
     const errorFooter = document.getElementById('error');
 
-    voterForm.addEventListener('submit', (event) => {
+    voterForm.addEventListener('submit', async (event) => {
       event.preventDefault(); // Prevent form submission
 
       const formData = new FormData(voterForm);
@@ -64,30 +65,31 @@
         return;
       }
 
-      
+
       // Existing code 
 
       // Handle photo upload
       const photoFile = photo.files[0];
 
       if (photoFile) {
+        try {
+          const imgUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(photoFile);
+          });
 
-        const reader = new FileReader();
-
-        reader.onload = function(event) {
-
-          const imgUrl = event.target.result;
-
+          // Create and display the img element
           const img = document.createElement('img');
           img.src = imgUrl;
           img.alt = 'Voter Photo';
-
           resultDiv.appendChild(img);
-
-        };
-
-        reader.readAsDataURL(photoFile);
-
+        } catch (error) {
+          // Handle errors during image processing
+          console.error('Error processing image:', error);
+          // Display an error message to the user if needed
+        }
       }
 
       // Display voter information
@@ -99,10 +101,9 @@
         <p>Address: ${address}</p>
       `;
 
-
-
-
-      });
+    });
   </script>
+</body>
+
 </body>
 </html>
