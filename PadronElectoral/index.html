@@ -75,18 +75,28 @@
 
       
       // Handle photo upload
-      const photoFile = photo.files[0]; // Get the uploaded photo file
+const photoFile = photo.files[0]; 
 
-      if (photoFile) {
-        const reader = new FileReader();
+if (photoFile) {
 
-        reader.onload = (event) => {
-          const imgUrl = event.target.result; // URL of the loaded image
-          resultDiv.innerHTML += `<img src="${imgUrl}" alt="Voter Photo">`;
-        };
+  const reader = new FileReader();
 
-        reader.readAsDataURL(photoFile); // Read the image file as a data URL
-      }
+  reader.onload = function(event) {
+
+    const imgUrl = event.target.result;
+
+    const img = document.createElement('img');
+    img.src = imgUrl;
+    img.alt = 'Voter Photo';
+
+    resultDiv.appendChild(img);
+
+  };
+
+  reader.readAsDataURL(photoFile);
+
+}
+
 
       });
   </script>
