@@ -8,9 +8,9 @@ app = Flask(__name__)
 
 # Configure db connection
 db = mysql.connector.connect(
-  host="localhost",
+  host="127.0.0.1",
   user="root",
-  password="password",
+  password="Felix1729!2020",
   database="electoral"
 )
 
@@ -18,7 +18,7 @@ cursor = db.cursor()
 
 @app.route('/')
 def index():
-  cursor.execute("SELECT * FROM voters")
+  cursor.execute("SELECT name, age, address, photo FROM voters")
   voters = cursor.fetchall()  
   return render_template('index.html', voters=voters)
 
