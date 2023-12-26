@@ -1,4 +1,4 @@
-// Select elements 
+// Select elements  
 const form = document.getElementById('voterForm');
 const resultDiv = document.getElementById('result');
 
@@ -19,14 +19,14 @@ form.addEventListener('submit', async (e) => {
   // Handle response
   if(response.ok) {
     const data = await response.json();
-    displayResult(data);
+    displayResult(data); 
   } else {
     console.error('Error submitting form');
   }
 
 });
 
-// Display result 
+// Display result  
 function displayResult(data) {
 
   resultDiv.innerHTML = `
@@ -34,8 +34,8 @@ function displayResult(data) {
     <p>
       Name: ${data.name}<br>
       Age: ${data.age}<br>
-      Gender: ${data.gender}<br>  
-      Address: ${data.address}
+      Gender: ${data.gender}<br>
+      Address: ${data.address} 
     </p>
   `;
 
