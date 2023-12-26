@@ -1,0 +1,38 @@
+<!-- voters.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voters</title>
+</head>
+<body>
+  <h1>Submitted Voters</h1>
+  
+  <div id="voters"></div>
+
+  <script>
+    // Fetch voter data on page load
+    fetch('/api/voters')
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(voter => {
+          displayVoter(voter); 
+        });
+      });
+
+    function displayVoter(voter) {
+      let voterDiv = document.createElement('div');
+      voterDiv.innerHTML = `
+        <h3>${voter.name}</h3>
+        <p>Age: ${voter.age}</p>
+        <p>Gender: ${voter.gender}</p>
+        <p>Address: ${voter.address}</p>
+        <img src="${voter.photo}">
+      `;
+
+      document.getElementById('voters').appendChild(voterDiv);
+    }
+  </script>
+
+</body>
+</html>
