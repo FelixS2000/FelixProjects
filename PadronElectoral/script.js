@@ -54,8 +54,9 @@ fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json'
     }
   })
   .catch(error => {
-    console.error('Error:', error.message);
+    console.error('Error fetching voter data:', error.message || error);
   });
+  
 
 
 
