@@ -18,6 +18,14 @@ if (!$stmt) {
     die('Query preparation failed: ' . $conn->error);
 }
 
+// ...
+$name = mysqli_real_escape_string($conn, $_POST['name']);
+$age = filter_var($_POST['age'], FILTER_VALIDATE_INT);
+$gender = mysqli_real_escape_string($conn, $_POST['gender']);
+$address = mysqli_real_escape_string($conn, $_POST['address']);
+// Handle photo upload securely (see details below)
+
+
 $stmt->bind_param('sisbs', $_POST['name'], $_POST['age'], $_POST['gender'], $_POST['address'], $_POST['photo']);
 
 $stmt->execute();
