@@ -3,31 +3,41 @@ fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json'
   .then(response => response.json())
   .then(data => {
 
-    // Get DB settings
-    const db = data.db;
-
     // Get add voter URL
-    const addVoterUrl = data.addVoterUrl;
+    const displayVoterUrl = data.displayVoterUrl;
 
-    // Use DB settings and URL for form submission
-    const formData = new FormData(voterForm);
-
-    if (addVoterUrl) {
-      // Construct the URL with GET parameters
-      const urlWithParams = `${addVoterUrl}?name=${formData.get('name')}&age=${formData.get('age')}&gender=${formData.get('gender')}&address=${formData.get('address')}&photo=${formData.get('photo')}`;
-
-      // Perform the GET request without a request body
-      return fetch(urlWithParams, {
-        method: 'GET',
-      });
+    // Use URL for fetching voter data
+    if (displayVoterUrl) {
+      // Perform the GET request for voter data
+      return fetch(displayVoterUrl);
     } else {
-      console.error('add_voter.php URL not defined in settings');
+      console.error('display_voter.php URL not defined in settings');
     }
 
   })
+  .then(response => response.json())
+  .then(voters => {
+    // Display voter data in the result div
+    const resultDiv = document.getElementById('result');
+    if (voters.length > 0) {
+      resultDiv.innerHTML = '<h3>Voter Information</h3>';
+      voters.forEach(voter => {
+        resultDiv.innerHTML += `
+          <img src="${voter.photo}">
+          <p>Name: ${voter.name}</p>
+          <p>Age: ${voter.age}</p>
+          <p>Gender: ${voter.gender}</p>
+          <p>Address: ${voter.address}</p>
+        `;
+      });
+    } else {
+      resultDiv.innerHTML = 'No voters found';
+    }
+  })
   .catch(error => {
-    console.error('Error fetching settings', error);
+    console.error('Error fetching voter data', error);
   });
+
 
 const voterForm = document.getElementById('voterForm');
 const resultDiv = document.getElementById('result');

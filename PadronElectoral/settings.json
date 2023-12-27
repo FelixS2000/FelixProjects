@@ -5,5 +5,6 @@
     "password": "Felix1729!2020",
     "name": "electoral"
   },
-  "addVoterUrl": "https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php" 
+  "addVoterUrl": "https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php",
+  "displayVoterUrl": "https://felixc2000.github.io/FelixProjects/PadronElectoral/display_voter.php"
 }
