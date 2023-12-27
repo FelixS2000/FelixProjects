@@ -14,7 +14,7 @@ fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json'
 
     if(addVoterUrl) {
       return fetch(addVoterUrl, {
-        method: 'GET',
+        method: 'POST',
         body: formData  
       });
     } else {
