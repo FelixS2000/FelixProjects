@@ -1,4 +1,6 @@
 // add_voter.php
+header("Access-Control-Allow-Origin: *"); // Allow all origins for testing, but restrict in production
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 $settings = json_decode(file_get_contents('settings.json'), true);
 if (json_last_error() !== JSON_ERROR_NONE) {
