@@ -1,20 +1,30 @@
 // Fetch settings
 fetch('settings.json')
-.then(response => response.json())
-.then(data => {
+  .then(response => response.json())
+  .then(data => {
 
-  // Get DB settings
-  const db = data.db;
+    // Get DB settings
+    const db = data.db;
 
-  // Use DB settings for form submission
-  const formData = new FormData(voterForm);
+    // Use DB settings for form submission
+    const formData = new FormData(voterForm);
 
-  fetch('add_voter.php', {
-    method: 'POST',
-    body: formData
+    // Check if add_voter.php exists before fetching
+    if(db.addVoterUrl) {
+      return fetch(db.addVoterUrl, { 
+        method: 'POST',
+        body: formData
+      });
+    } else {
+      console.error('add_voter.php URL not defined in settings');
+    }
+
+  })
+  .catch(error => {
+    console.error('Error fetching settings', error);
   });
 
-});
+
 
 
 const voterForm = document.getElementById('voterForm');
