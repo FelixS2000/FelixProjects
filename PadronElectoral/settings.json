@@ -1,8 +1,9 @@
 {
   "db": {
-    "host": "127.0.0.1",
+    "host": "127.0.0.1", 
     "user": "root",
     "password": "Felix1729!2020",
     "name": "electoral"
-  }
+  },
+  "addVoterUrl": "add_voter.php" 
 }
