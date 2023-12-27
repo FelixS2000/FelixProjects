@@ -1,4 +1,3 @@
--- Active: 1703690840413@@127.0.0.1@3306@electoral
 // add_voter.php
 
 // Get DB settings from settings.json
