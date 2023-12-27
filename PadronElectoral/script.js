@@ -1,11 +1,21 @@
-const settings = {
-  "db": {
-    "host": "127.0.0.1", 
-    "user": "root",
-    "password": "Felix1729!2020",
-    "name": "electoral"
-  }
-};
+// Fetch settings
+fetch('settings.json')
+.then(response => response.json())
+.then(data => {
+
+  // Get DB settings
+  const db = data.db;
+
+  // Use DB settings for form submission
+  const formData = new FormData(voterForm);
+
+  fetch('add_voter.php', {
+    method: 'POST',
+    body: formData
+  });
+
+});
+
 
 const voterForm = document.getElementById('voterForm');
 const resultDiv = document.getElementById('result');
