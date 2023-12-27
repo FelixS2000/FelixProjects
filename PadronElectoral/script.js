@@ -1,5 +1,5 @@
 // Fetch settings
-fetch('settings.json')
+fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json')
   .then(response => response.json())
   .then(data => {
 
