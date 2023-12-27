@@ -1,6 +1,11 @@
 // Fetch settings
 fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to fetch settings');
+    }
+    return response.json();
+  })
   .then(data => {
 
     // Get add voter URL
@@ -12,14 +17,20 @@ fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json'
       return fetch(displayVoterUrl);
     } else {
       console.error('display_voter.php URL not defined in settings');
+      throw new Error('display_voter.php URL not defined in settings');
     }
 
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to fetch voter data');
+    }
+    return response.json();
+  })
   .then(voters => {
     // Display voter data in the result div
     const resultDiv = document.getElementById('result');
-    if (voters.length > 0) {
+    if (voters && voters.length > 0) {
       resultDiv.innerHTML = '<h3>Voter Information</h3>';
       voters.forEach(voter => {
         resultDiv.innerHTML += `
@@ -35,9 +46,8 @@ fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json'
     }
   })
   .catch(error => {
-    console.error('Error fetching voter data', error);
+    console.error('Error:', error.message);
   });
-
 
 const voterForm = document.getElementById('voterForm');
 const resultDiv = document.getElementById('result');
@@ -67,16 +77,11 @@ voterForm.addEventListener('submit', (event) => {
 
   // Display result
   resultDiv.innerHTML = `
-  <h3>Voter Information</h3>
-
-  <img src="${URL.createObjectURL(photo)}">
-
-  <p>Name: ${name}</p>
-  <p>Age: ${age}</p>
-  <p>Gender: ${gender}</p>
-  <p>Address: ${address}</p>
+    <h3>Voter Information</h3>
+    <img src="${URL.createObjectURL(photo)}">
+    <p>Name: ${name}</p>
+    <p>Age: ${age}</p>
+    <p>Gender: ${gender}</p>
+    <p>Address: ${address}</p>
   `;
 });
-
-
-
