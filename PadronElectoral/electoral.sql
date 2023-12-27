@@ -9,3 +9,5 @@ CREATE TABLE voters (
   gender VARCHAR(10),
   photo BLOB
 );
+
+INSERT INTO voters (id,name,age,address,gender,photo) VALUES (?,?,?,?,?)
