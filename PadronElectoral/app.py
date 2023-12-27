@@ -1,3 +1,13 @@
+conn = mysql.connector.connect(
+  host='127.0.0.1',
+  user='root',
+  password='Felix1729!2020',
+  database='electoral'
+)
+
+
+
+
 # app.py
 
 import mysql.connector
