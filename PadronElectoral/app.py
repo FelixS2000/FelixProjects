@@ -1,3 +1,4 @@
+import mysql.connector
 conn = mysql.connector.connect(
   host='127.0.0.1',
   user='root',
@@ -10,7 +11,7 @@ conn = mysql.connector.connect(
 
 # app.py
 
-import mysql.connector
+
 import json
 
 def add_voter(voter_data):
