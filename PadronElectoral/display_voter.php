@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-echo json_encode([$name,$age,$gender,$address]);
+echo json_encode($voters);
 // Assuming you are using MySQL for the database
 $host = '127.0.0.1';
 $user = 'root';

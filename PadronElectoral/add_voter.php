@@ -1,5 +1,6 @@
 <?php
-
+header('Content-Type: application/json');
+echo json_encode($voters);
 // Check if the request method is GET
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Assuming you are using MySQL for the database
