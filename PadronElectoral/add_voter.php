@@ -1,6 +1,7 @@
 // add_voter.php
 
 // Get DB settings from settings.json
+header("Access-Control-Allow-Methods: POST"); 
 $settings = json_decode(file_get_contents('settings.json'), true);
 $db = $settings['db'];
 
