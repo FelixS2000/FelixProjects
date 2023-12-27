@@ -1,36 +1,48 @@
 <?php
-header('Content-Type: application/json');
-echo json_encode($voters);
-// Assuming you are using MySQL for the database
-$host = '127.0.0.1';
-$user = 'root';
-$password = 'Felix1729!2020';
-$database = 'electoral';
 
-// Create a database connection
-$conn = new mysqli($host, $user, $password, $database);
+// Read database connection details from settings.json
+$settingsJson = file_get_contents("settings.json");
+$settings = json_decode($settingsJson, true);
 
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Check if the file is not empty
+if (!empty($settings)) {
+    // Extract database connection details
+    $dbHost = $settings["db"]["127.0.0.1"];
+    $dbUser = $settings["db"]["root"];
+    $dbPassword = $settings["db"]["Felix1729!2020"];
+    $dbName = $settings["db"]["electoral"];
 
-// Perform a simple query to retrieve voter information (replace this with your actual database schema)
-$sql = "SELECT name,age,address,gender,photo FROM voters";
-$result = $conn->query($sql);
+    // Create a database connection
+    $conn = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
 
-if ($result->num_rows > 0) {
-    // Output data in JSON format (you can customize this based on your needs)
-    $voters = array();
-    while ($row = $result->fetch_assoc()) {
-        $voters[] = $row;
+    // Check the connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-    echo json_encode($voters);
+
+    // Fetch voter data from the database
+    $sql = "SELECT * FROM voters";
+    $result = $conn->query($sql);
+
+    // Check if there are rows in the result
+    if ($result->num_rows > 0) {
+        // Fetch all rows and convert to an associative array
+        while ($row = $result->fetch_assoc()) {
+            $voters[] = $row;
+        }
+
+        // Output the voter data as JSON
+        header("Content-Type: application/json");
+        echo json_encode($voters);
+    } else {
+        // Handle cases where no voters are found
+        echo "No voters found!";
+    }
+
+    // Close the database connection
+    $conn->close();
 } else {
-    echo "No voters found";
+    // Handle cases where the settings are not available
+    echo "Invalid settings!";
 }
-
-// Close the database connection
-$conn->close();
-
 ?>

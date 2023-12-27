@@ -1,45 +1,34 @@
 <?php
-header('Content-Type: application/json');
-echo json_encode($voters);
-// Check if the request method is GET
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Assuming you are using MySQL for the database
-    $host = '127.0.0.1';
-    $user = 'root';
-    $password = 'Felix1729!2020';
-    $database = 'electoral';
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $name = htmlspecialchars($_POST["name"]);
+    $age = htmlspecialchars($_POST["age"]);
+    $gender = htmlspecialchars($_POST["gender"]);
+    $address = htmlspecialchars($_POST["address"]);
+    // Note: You should handle file uploads securely, and this example is simplified for demonstration purposes.
+    // You may want to store uploaded files in a secure directory and validate file types, size, etc.
+    $photo = $_FILES["photo"]["name"];
+    
+    // Create an associative array for the voter data
+    $voterData = array(
+        "name" => $name,
+        "age" => $age,
+        "gender" => $gender,
+        "address" => $address,
+        "photo" => $photo
+    );
 
-    // Create a database connection
-    $conn = new mysqli($host, $user, $password, $database);
+    // Convert the array to JSON format
+    $jsonData = json_encode($voterData);
 
-    // Check the connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    // Save the voter data to a file (for demonstration purposes)
+    file_put_contents("voters.json", $jsonData);
 
-    // Retrieve data from the GET parameters
-    $name = $_GET['name'];
-    $age = $_GET['age'];
-    $gender = $_GET['gender'];
-    $address = $_GET['address'];
-    $photo = $_GET['photo'];  // Note: In practice, you should handle file uploads differently
-
-    // Perform database insertion (replace this with your actual database schema)
-    $sql = "INSERT INTO voters (name, age, gender, address, photo) VALUES ('$name', $age, '$gender', '$address', '$photo')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Voter added successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // Close the database connection
-    $conn->close();
+    // Provide a success message
+    echo "Voter added successfully!";
 } else {
-    // If the request method is not GET, return an error
-    header('HTTP/1.1 405 Method Not Allowed');
-    header('Allow: GET');
-    echo "Method Not Allowed";
+    // Handle cases where the form is not submitted properly
+    echo "Invalid request!";
 }
-
 ?>
