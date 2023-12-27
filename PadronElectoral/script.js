@@ -12,10 +12,13 @@ fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json'
     // Use DB settings and URL for form submission
     const formData = new FormData(voterForm);
 
-    if(addVoterUrl) {
-      return fetch(addVoterUrl, {
-        method: 'POST',
-        body: formData  
+    if (addVoterUrl) {
+      // Construct the URL with GET parameters
+      const urlWithParams = `${addVoterUrl}?name=${formData.get('name')}&age=${formData.get('age')}&gender=${formData.get('gender')}&address=${formData.get('address')}&photo=${formData.get('photo')}`;
+
+      // Perform the GET request without a request body
+      return fetch(urlWithParams, {
+        method: 'GET',
       });
     } else {
       console.error('add_voter.php URL not defined in settings');
@@ -24,10 +27,7 @@ fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json'
   })
   .catch(error => {
     console.error('Error fetching settings', error);
-  });  
-
-
-
+  });
 
 const voterForm = document.getElementById('voterForm');
 const resultDiv = document.getElementById('result');
@@ -66,6 +66,7 @@ voterForm.addEventListener('submit', (event) => {
   <p>Gender: ${gender}</p>
   <p>Address: ${address}</p>
   `;
-
-
 });
+
+
+
