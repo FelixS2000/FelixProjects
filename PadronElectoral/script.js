@@ -23,31 +23,41 @@ fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json'
   })
   .then(response => {
     if (!response.ok) {
-      throw new Error('Failed to fetch voter data');
+      throw new Error(`Failed to fetch voter data. Status: ${response.status}`);
     }
-    return response.json();
+    return response.text();
   })
-  .then(voters => {
-    // Display voter data in the result div
-    const resultDiv = document.getElementById('result');
-    if (voters && voters.length > 0) {
-      resultDiv.innerHTML = '<h3>Voter Information</h3>';
-      voters.forEach(voter => {
-        resultDiv.innerHTML += `
-          <img src="${voter.photo}">
-          <p>Name: ${voter.name}</p>
-          <p>Age: ${voter.age}</p>
-          <p>Gender: ${voter.gender}</p>
-          <p>Address: ${voter.address}</p>
-        `;
-      });
-    } else {
-      resultDiv.innerHTML = 'No voters found';
+  .then(responseText => {
+    // Attempt to parse the response text as JSON
+    try {
+      const voters = JSON.parse(responseText);
+
+      // Display voter data in the result div
+      const resultDiv = document.getElementById('result');
+      if (voters && voters.length > 0) {
+        resultDiv.innerHTML = '<h3>Voter Information</h3>';
+        voters.forEach(voter => {
+          resultDiv.innerHTML += `
+            <img src="${voter.photo}">
+            <p>Name: ${voter.name}</p>
+            <p>Age: ${voter.age}</p>
+            <p>Gender: ${voter.gender}</p>
+            <p>Address: ${voter.address}</p>
+          `;
+        });
+      } else {
+        resultDiv.innerHTML = 'No voters found';
+      }
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+      throw new Error('Error parsing JSON');
     }
   })
   .catch(error => {
     console.error('Error:', error.message);
   });
+
+
 
 const voterForm = document.getElementById('voterForm');
 const resultDiv = document.getElementById('result');
