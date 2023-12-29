@@ -35,10 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
       <p>Address: ${address}</p>
     `;
 
-    // Perform the POST request to add the voter
-    fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php', {
-      method: 'get',
-      body: formData,
+    // Perform the GET request to add the voter
+    const url = `https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php?name=${name}&age=${age}&gender=${gender}&address=${address}&photo=${photo}`;
+   
+    fetch(url, {
+      method: 'GET',
     })
       .then(response => {
         if (!response.ok) {
