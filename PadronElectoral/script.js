@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Perform the POST request to add the voter
     fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php', {
-      method: 'POST',
+      method: 'get',
       body: formData,
     })
       .then(response => {
