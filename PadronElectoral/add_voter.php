@@ -9,7 +9,10 @@ $picture = $_FILES['photo']['name'];
 // Move the uploaded picture to a designated folder
 $targetDir = "uploads/";
 $targetFile = $targetDir . basename($picture);
-move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile);
+
+if (!move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile)) {
+    die("Error moving uploaded file");
+}
 
 // Save the voter information to the database
 $dbHost = "127.0.0.1";
@@ -26,13 +29,20 @@ if ($conn->connect_error) {
 }
 
 // Prepare and execute the SQL query
-$sql = "INSERT INTO voters (name, address, gender, age, picture) VALUES ('$name', '$address', '$gender', '$age', '$picture')";
-if ($conn->query($sql) === TRUE) {
+$sql = "INSERT INTO voters (name, address, gender, age, picture) VALUES (?, ?, ?, ?, ?)";
+
+// Bind parameters to the SQL query
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("sssiss", $name, $address, $gender, $age, $picture);
+
+// Execute the SQL query
+if ($stmt->execute()) {
     echo "Voter added successfully!";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $stmt->error;
 }
 
-// Close the database connection
+// Close the prepared statement and the database connection
+$stmt->close();
 $conn->close();
 ?>
