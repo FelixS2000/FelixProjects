@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
       errorFooter.textContent = errors.join(', ');
       return;
     }
-
+    });
     // Display result
     resultDiv.innerHTML = `
       <h3>Voter Information</h3>
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(error => {
         console.error('Error adding voter:', error.message || error);
       });
-  });
+  
 
   // Fetch voter data from the specified URL in settings
   fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/settings.json')
