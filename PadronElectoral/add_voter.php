@@ -4,12 +4,12 @@ $name = $_POST['name'];
 $address = $_POST['address'];
 $gender = $_POST['gender'];
 $age = $_POST['age'];
-$picture = $_FILES['picture']['name'];
+$picture = $_FILES['photo']['name'];
 
 // Move the uploaded picture to a designated folder
 $targetDir = "uploads/";
 $targetFile = $targetDir . basename($picture);
-move_uploaded_file($_FILES['picture']['tmp_name'], $targetFile);
+move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile);
 
 // Save the voter information to the database
 $dbHost = "127.0.0.1";
