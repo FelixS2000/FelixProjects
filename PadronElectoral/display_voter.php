@@ -1,5 +1,4 @@
 <?php
-// display_voter.php
 require 'db_config.php';
 
 $result = $conn->query("SELECT * FROM voters");
