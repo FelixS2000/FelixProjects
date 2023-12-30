@@ -1,3 +1,4 @@
+// add_voter.php
 <?php
 // add_voter.php
 
@@ -14,8 +15,10 @@ if (isset($_POST['voterName']) && isset($_POST['voterAge']) && isset($_POST['vot
     // Insert data into database
     $query = "INSERT INTO voters (name, age, voter_id) VALUES ('$voterName', '$voterAge', '$voterID')";
     if (mysqli_query($conn, $query)) {
+        http_response_code(200);
         echo "Voter added successfully";
     } else {
+        http_response_code(500);
         echo "Error: " . $query . "" . mysqli_error($conn);
     }
 }
