@@ -3,16 +3,16 @@ document.getElementById('addVoterForm').addEventListener('submit', function (eve
   event.preventDefault();
 
   const formData = new FormData(event.target);
-  fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php', {
+  fetch('add_voter.php', {
       method: 'POST',
       body: formData
   })
-      .then(response => response.json())
+      .then(response => response.text())
       .then(data => console.log(data))
       .catch(error => console.error(error));
 });
 
-fetch('https://felixc2000.github.io/FelixProjects/PadronElectoral/display_voter.php')
+fetch('display_voter.php')
   .then(response => response.json())
   .then(data => {
       const votersList = document.getElementById('votersList');

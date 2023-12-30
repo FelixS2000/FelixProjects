@@ -1,14 +1,25 @@
 <?php
 // add_voter.php
-require 'db_config.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Include database connection file
+require_once 'database.php';
+
+// Check if form data is submitted
+if (isset($_POST['voterName']) && isset($_POST['voterAge']) && isset($_POST['voterID'])) {
+    // Get form data
     $voterName = $_POST['voterName'];
     $voterAge = $_POST['voterAge'];
     $voterID = $_POST['voterID'];
 
-    $stmt = $conn->prepare("INSERT INTO voters (name, age, voter_id) VALUES (?, ?, ?)");
-    $stmt->bind_param("sii", $voterName, $voterAge, $voterID);
-    $stmt->execute();
+    // Insert data into database
+    $query = "INSERT INTO voters (name, age, voter_id) VALUES ('$voterName', '$voterAge', '$voterID')";
+    if (mysqli_query($conn, $query)) {
+        echo "Voter added successfully";
+    } else {
+        echo "Error: " . $query . "" . mysqli_error($conn);
+    }
 }
+
+// Close connection
+mysqli_close($conn);
 ?>
