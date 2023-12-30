@@ -9,7 +9,6 @@ document.getElementById('addVoterForm').addEventListener('submit', function (eve
   })
       .then(response => response.text())
       .then(data => console.log(data))
-      .catch(error => console.error(error));
 });
 
 fetch('display_voter.php')
@@ -22,4 +21,3 @@ fetch('display_voter.php')
           votersList.appendChild(listItem);
       });
   })
-  .catch(error => console.error(error));
