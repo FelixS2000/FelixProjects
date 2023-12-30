@@ -1,3 +1,4 @@
+// settings.json
 {
   "db": {
     "host": "127.0.0.1",
@@ -5,6 +6,6 @@
     "password": "Felix1729!2020",
     "name": "electoral"
   },
-  "addVoterUrl": "https://felixc2000.github.io/FelixProjects/PadronElectoral/add_voter.php",
-  "displayVoterUrl": "https://felixc2000.github.io/FelixProjects/PadronElectoral/display_voter.php"
+  "addVoterUrl": "add_voter.php",
+  "displayVoterUrl": "display_voter.php"
 }
