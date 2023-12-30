@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +29,18 @@
     <script src="add_voter.php"></script>
     <script src="database.php"></script>
     <script src="db_config.php"></script>
-    <script src="display_voter.php"></script>
+    <script>
+        fetch('display_voter.php')
+            .then(response => response.json())
+            .then(data => {
+                const votersList = document.getElementById('votersList');
+                data.forEach(voter => {
+                    const listItem = document.createElement('p');
+                    listItem.textContent = `${voter.name} - ${voter.age} años - ${voter.voter_id}`;
+                    votersList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error(error));
+    </script>
 </body>
 </html>
