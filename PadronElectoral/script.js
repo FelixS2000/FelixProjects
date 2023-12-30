@@ -1,23 +1,45 @@
-// script.js
-document.getElementById('addVoterForm').addEventListener('submit', function (event) {
+
+let votersList = [];
+
+const addVoterForm = document.getElementById('addVoterForm');
+addVoterForm.addEventListener('submit', (event) => {
     event.preventDefault();
-  
-    const formData = new FormData(event.target);
-    fetch('add_voter.php', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.text())
-        .then(data => console.log(data))
-  });
-  
-  fetch('display_voter.php')
-    .then(response => response.json())
-    .then(data => {
-        const votersList = document.getElementById('votersList');
-        data.forEach(voter => {
-            const listItem = document.createElement('p');
-            listItem.textContent = `${voter.name} - ${voter.age} años - ${voter.voter_id}`;
-            votersList.appendChild(listItem);
-        });
-    })
+    const voterName = document.getElementById('voterName').value;
+    const voterAge = document.getElementById('voterAge').value;
+    const voterID = document.getElementById('voterID').value;
+
+    const newVoter = {
+        name: voterName,
+        age: voterAge,
+        id: voterID,
+    };
+
+    votersList.push(newVoter);
+    renderVotersList();
+    addVoterForm.reset();
+});
+
+function renderVotersList() {
+    const votersListElement = document.getElementById('votersList');
+    votersListElement.innerHTML = '';
+
+    votersList.forEach((voter, index) => {
+        const voterElement = document.createElement('div');
+        voterElement.innerHTML = `
+            <strong>${voter.name}</strong>
+            <br>
+            Edad: ${voter.age}
+            <br>
+            Identificacion: ${voter.id}
+            <br>
+            <button onclick="removeVoter(${index})">Eliminar</button>
+            <hr>
+        `;
+        votersListElement.appendChild(voterElement);
+    });
+}
+
+function removeVoter(index) {
+    votersList.splice(index, 1);
+    renderVotersList();
+}
