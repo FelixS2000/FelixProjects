@@ -1,11 +1,7 @@
--- electoral.sql
-CREATE DATABASE electoral;
-USE electoral;
 CREATE TABLE voters (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(50) NOT NULL,
-  age INT NOT NULL,
-  address VARCHAR(100) NOT NULL,
-  gender VARCHAR(10),
-  photo BLOB
+ id INT PRIMARY KEY AUTO_INCREMENT,
+ name VARCHAR(255) NOT NULL,
+ birthdate DATE NOT NULL,
+ address VARCHAR(255) NOT NULL,
+ registered_to_vote BOOLEAN NOT NULL DEFAULT 0
 );
