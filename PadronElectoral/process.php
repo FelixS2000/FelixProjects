@@ -1,6 +1,6 @@
 <?php
 // Connect to database (replace placeholders with actual credentials)
-$conn = mysqli_connect("localhost", "username", "password", "electoral");
+$conn = mysqli_connect("localhost", "root", "password", "electoral");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
