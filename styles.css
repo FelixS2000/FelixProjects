@@ -1,56 +1,80 @@
-/* Add your preferred styles here */
-body {
-    font-family: 'Arial', sans-serif;
+/* Reset some default styling */
+body, h1, h2, p, ul {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+/* Header Styles */
 header {
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+header img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+/* Navigation Styles */
+nav {
     background-color: #333;
     color: #fff;
-    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Projects Section Styles */
+#projects {
     padding: 20px;
 }
 
-nav {
-    background-color: #444;
+.project {
+    margin-bottom: 20px;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+/* About Me Section Styles */
+#about {
+    padding: 20px;
 }
 
-li {
-    float: left;
-}
-
-a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-a:hover {
-    background-color: #555;
-}
-
-section {
-    padding: 5px;
-    text-align: center;
-}
-
+/* Footer Styles */
 footer {
-    background-color: #333;
-    color: #fff;
     text-align: center;
     padding: 10px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Responsive Styles */
+@media screen and (min-width: 600px) {
+    /* Adjustments for tablets and larger screens */
+    header {
+        padding: 40px;
+    }
+
+    nav ul {
+        padding: 20px 0;
+    }
+
+    #projects, #about {
+        padding: 40px;
+    }
 }
