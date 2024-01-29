@@ -4,26 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="adviweather icon" href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/favicon.ico">
-    <title>Currency Budy</title>
+    <link rel="currency icon" href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/favicon.ico">
+    <title>Currency Buddy</title>
     <link rel="stylesheet" href="styles/style.css">
-
 </head>
 <body>
-    <div class="converter">
-        <h1>Currency Buddy</h1>
-        <div>
-            <input type="number" id="amount" placeholder="Enter amount" />
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <div class="currency-container">
+            <select id="currency-first">
+                <option value="AUD">AUD</option>
+                <option value="CAD">CAD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR">INR</option>
+                <option value="JPY">JPY</option>
+                <option value="USD" selected>USD</option>
+            </select>
+            <input type="number" id="worth-first" value="1" min="0">
         </div>
-        <div>
-            <select id="fromCurrency"></select>
-            <span>to</span>
-            <select id="toCurrency"></select>
+        <div class="currency-container">
+            <select id="currency-second">
+                <option value="AUD">AUD</option>
+                <option value="CAD">CAD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR" selected>INR</option>
+                <option value="JPY">JPY</option>
+                <option value="USD">USD</option>
+            </select>
+            <input type="number" id="worth-second"  disabled>
         </div>
-        <div>
-            <button onclick="convertCurrency()">Convert</button>
-        </div>
-        <div id="result"></div>
+        <p class="exchange-rate" id="exchange-rate">1 USD = 138.5802 JPY</p>
     </div>
     <script src="scripts/script.js"></script>
 </body>
