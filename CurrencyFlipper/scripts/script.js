@@ -1,5 +1,5 @@
 const apiKey = '67i9HWKlwywfSmdVcFlAAwuXvdM1t73j';
-const apiUrl = `https://api.apilayer.com/exchangerates_data/latest?symbols=symbols&base=base&apikey=${apiKey}`;
+const apiUrl = `https://api.apilayer.com/exchangerates_data/live?base=USD&symbols=EUR,GBP&apikey=${apiKey}`;
 
 const fromCurrencySelect = document.getElementById('fromCurrency');
 const toCurrencySelect = document.getElementById('toCurrency');
