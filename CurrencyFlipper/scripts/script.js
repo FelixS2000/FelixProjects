@@ -1,33 +1,49 @@
-const currencyFirstEl = document.getElementById("currency-first");
+const apiKey = '67i9HWKlwywfSmdVcFlAAwuXvdM1t73j';
+const apiUrl = `https://api.apilayer.com/exchangerates_data/latest?symbols=symbols&base=base&apikey=${apiKey}`;
 
-const worthFirstEl = document.getElementById("worth-first");
+const fromCurrencySelect = document.getElementById('fromCurrency');
+const toCurrencySelect = document.getElementById('toCurrency');
+const amountInput = document.getElementById('amount');
+const convertButton = document.getElementById('convertButton');
+const convertedAmountSpan = document.getElementById('convertedAmount');
 
-const currencySecondEl = document.getElementById("currency-second");
+// Set up headers
+var myHeaders = new Headers();
+myHeaders.append("apikey", apiKey);
 
-const worthSecondEl = document.getElementById("worth-second");
+// Set up fetch options
+var requestOptions = {
+    method: 'GET',
+    redirect: 'follow',
+    headers: myHeaders
+};
 
-const exchangeRateEl = document.getElementById("exchange-rate");
+// Fetch currency data using your API key
+fetch(apiUrl, requestOptions)
+    .then(response => response.json())
+    .then(data => {
+        const currencies = Object.keys(data.rates);
 
-updateRate()
+        // Populate the currency selects
+        currencies.forEach(currency => {
+            const option = document.createElement('option');
+            option.value = currency;
+            option.text = currency;
+            fromCurrencySelect.appendChild(option);
+            toCurrencySelect.appendChild(option.cloneNode(true));
+        });
 
-function updateRate() {
-  fetch(
-    `https://v6.exchangerate-api.com/v6/5f9d1c87f7250159c9c9b17d/latest/${currencyFirstEl.value}`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      const rate = data.conversion_rates[currencySecondEl.value];
-      console.log(rate);
-      exchangeRateEl.innerText = `1 ${currencyFirstEl.value} = ${
-        rate + " " + currencySecondEl.value
-      }`;
+        // Set up conversion logic
+        convertButton.addEventListener('click', () => {
+            const fromCurrency = fromCurrencySelect.value;
+            const toCurrency = toCurrencySelect.value;
+            const amount = parseFloat(amountInput.value);
 
-      worthSecondEl.value = (worthFirstEl.value * rate).toFixed(2)
-    });
-}
+            // Use the fetched exchange rates for conversion (replace with your logic)
+            const conversionRate = data.rates[toCurrency] / data.rates[fromCurrency];
+            const convertedAmount = amount * conversionRate;
 
-currencyFirstEl.addEventListener("change", updateRate);
-
-currencySecondEl.addEventListener("change", updateRate);
-
-worthFirstEl.addEventListener("input", updateRate);
+            convertedAmountSpan.textContent = convertedAmount.toFixed(2);
+        });
+    })
+    .catch(error => console.log('error', error));
