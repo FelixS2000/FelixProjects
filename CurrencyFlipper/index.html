@@ -2,34 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="currency icon" href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/favicon.ico">
-    <title>Currency Buddy</title>
     <link rel="stylesheet" href="styles/style.css">
+    <title>Currency Converter</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Currency Converter</h1>
-        <div class="form-group">
-            <label for="fromCurrency">From Currency:</label>
-            <select id="fromCurrency">
-                </select>
+
+<div class="converter-container">
+    <h1>Currency Converter</h1>
+
+    <form id="currencyConverterForm">
+        <label for="fromCurrency">From Currency:</label>
+        <select id="fromCurrency"></select>
+
+        <label for="toCurrency">To Currency:</label>
+        <select id="toCurrency"></select>
+
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+
+        <button type="button" id="convertButton">Convert</button>
+
+        <div id="convertedAmountContainer">
+            <p>Converted Amount:</p>
+            <span id="convertedAmount"></span>
         </div>
-        <div class="form-group">
-            <label for="toCurrency">To Currency:</label>
-            <select id="toCurrency">
-                </select>
-        </div>
-        <div class="form-group">
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" placeholder="Enter amount">
-        </div>
-        <button id="convertButton">Convert</button>
-        <div class="result">
-            <p>Converted Result: <span id="convertedAmount"></span></p>
-        </div>
-    </div>
-    <script src="scripts/script.js"></script>
+    </form>
+</div>
+
+<script src="scripts/script.js"></script>
 </body>
 </html>
