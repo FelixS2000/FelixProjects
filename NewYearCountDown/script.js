@@ -3,19 +3,20 @@ let hrBox = document.getElementById("hr-box");
 let minBox = document.getElementById("min-box");
 let secBox = document.getElementById("sec-box");
 
-// Get the current year and calculate the end date for the next year
-let currentYear = new Date().getFullYear();
-let nextYear = currentYear + 1;
-let endDate = new Date(nextYear, 0, 1, 00, 00);
-let endTime = endDate.getTime();
-
 // Function to update the heading with the target year
 function updateHeading() {
+  let currentYear = new Date().getFullYear();
+  let nextYear = currentYear + 1;
   let heading = document.querySelector(".heading h1");
   heading.textContent = nextYear;
 }
 
 function countdown() {
+  let currentYear = new Date().getFullYear();
+  let nextYear = currentYear + 1;
+  let endDate = new Date(nextYear, 0, 1, 0, 0);
+  let endTime = endDate.getTime();
+
   let todayDate = new Date();
   let todayTime = todayDate.getTime();
   let remainingTime = endTime - todayTime;
