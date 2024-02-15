@@ -27,7 +27,7 @@ console.log(reverseString("Interview, Happy"));
 
 function findLongestWord(sentence){
 // Step 1: Split the sentence into an array of words
-    const words = sentece.split(" ");
+    const words = sentece.split("");
     let longestWord = "";
 
 // Step 2: Iterate through each word in the array
