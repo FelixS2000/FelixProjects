@@ -1,70 +1,51 @@
-/*1. Write a function that returns the reverse of a string?*/
-// using for loop
-function reverseString(str) {
-// Initialize an empty string to
-// store the reversed string
-let reversed = "";
+console.log("first");
+    
+    setTimeout(() => {
+      console.log("second");
+    }, 2000);
+    
+    console.log("third");
 
-// Iterate through the characters of the
-// input string in reverse order
-for (let i = str.length - 1; i >= 0; i--){
-reversed += str[i];
+    // async/await example
+    async function fetchData() {
+      // Simulating asynchronous code
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve('Data fetched!');
+        }, 1000);
+      });
     }
-    return reversed;
-}
-console.log(reverseString("Interview, Happy"));
 
-// Shorcut way
-function reverseString(str) {
-// Split the string into an array of characters
-// Reverse the order of the elements in the array
-// Join the characters back together into a str
-   return str.split("").reverse().join("");
-}
-console.log(reverseString("Interview, Happy"));
+    async function main() {
+      try {
+        const data = await fetchData();
+        console.log(data);
+        document.querySelector('.output').textContent = data; // Displaying output on the webpage
+      } catch (error) {
+        console.error('An error occurred:', error);
+        document.querySelector('.output').textContent = 'Error occurred'; // Displaying error message on the webpage
+      }
+    }
 
-/*2.  Write a function that returns the longest word in the sentence.*/
+    main();
 
-function findLongestWord(sentence) {
-    // Step 1: Split the sentence into an array of words
-    const words = sentence.split(" ");
-    let longestWord = "";
-
-    // Step 2: Iterate through each word in the array
-    for (let word of words) {
-        // Step 3: Check if the current word is longer than the current longest word
-        if (word.length > longestWord.length) {
-            // Step 4: If true, update the longestWord variable
-            longestWord = word;
+    // then() callback example
+     const myPromise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const randomNumber = Math.random();
+        if (randomNumber < 0.5) {
+          resolve(randomNumber);
+        } else {
+          reject(new Error("Random number is too high"));
         }
-    }
-    return longestWord;
-}
+      }, 1000);
+    });
 
-// Find the Longest word
-console.log(findLongestWord("I love coding in JavaScript"));
-
-/*3. Write a function that checks whether a given string is a palindrome or not?*/
-
-function isPalindrome(str){
-
-const reversedStr = str.split("").reverse().join("");
-return str === reversedStr;
-
-}
-console.log(isPalindrome("racecar"));
-
-/*4. Write a function to remove duplicate elements from an array*/
-
-function removeDuplicates(arr){
-
-  const uniqueElements = [];
-
-  for (i = 0; i < arr.length; i++){
-    if (uniqueElements.indexOf(arr[i]) === -1) {
-     uniqueElements.push(arr[i]);
-     }
-}
-return uniqueElements;
-}
-console.log(removeDuplicates([1, 2, 3, 4, 5, 6, 6]));
+    myPromise.then(
+      (resolvedValue) => {
+        console.log(`Promise resolved with value: ${resolvedValue}`);
+      },
+      (error) => {
+        console.error(`Promise rejected with error: ${error.message}`);
+      }
+    );
