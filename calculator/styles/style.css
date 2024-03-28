@@ -46,3 +46,7 @@ span#result {
     display: inline-block;
     margin-left: 10px;
 }
+span#date{
+    display: inline-block;
+    margin-left: 10px;
+}
