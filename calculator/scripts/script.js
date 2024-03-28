@@ -25,3 +25,9 @@ function divide(){
     let result = Number(num1) / Number(num2);
     document.getElementById('result').innerHTML = result;
 }
+
+function date(){
+    let date = new Date();
+    let fullDate = new Date(date.getFullYear(), date.getMonth()+1, date.getDate());
+    document.getElementById("date").innerHTML = fullDate;
+}
