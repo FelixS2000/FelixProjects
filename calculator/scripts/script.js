@@ -3,6 +3,12 @@ function add(){
     let num2 = document.getElementById('num2');
     let result = Number(num1) + Number(num2);
     document.getElementById('result').innerHTML = result;
+    if (result % 2 == 0){
+        document.getElementById('result').style.color = "green";
+    }
+    else{
+        document.getElementById('result').style.color = "red";
+    }
 }
 
 function subtract(){
@@ -10,6 +16,12 @@ function subtract(){
   let num2 = document.getElementById('num2');
   let result = Number(num1) - Number(num2);
   document.getElementById('result').innerHTML = result;
+  if (result % 2 == 0){
+      document.getElementById('result').style.color = "green";
+  }
+  else{
+      document.getElementById('result').style.color = "red";
+  }
 }
 
 function multiply(){
@@ -17,6 +29,12 @@ function multiply(){
     let num2 = document.getElementById('num2');
     let result = Number(num1) * Number(num2);
     document.getElementById('result').innerHTML = result;
+    if (result % 2 == 0){
+        document.getElementById('result').style.color = "green";
+    }
+    else{
+        document.getElementById('result').style.color = "red";
+    }
 }
 
 function divide(){
@@ -24,6 +42,13 @@ function divide(){
     let num2 = document.getElementById('num2');
     let result = Number(num1) / Number(num2);
     document.getElementById('result').innerHTML = result;
+    if (result % 2 == 0){
+        document.getElementById('result').style.color = "green";
+    }
+    else {
+       alert("Error! Division by zero is not allowed."); 
+       return false;
+    }
 }
 
 function date(){
