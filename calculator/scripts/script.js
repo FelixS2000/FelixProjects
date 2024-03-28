@@ -1,31 +1,38 @@
 function add() {
-    let num1 = document.getElementById("num1").value;
-    let num2 = document.getElementById("num2").value;
-    let result = Number(num1) + Number(num2);
+    const num1 = parseFloat(document.getElementById("num1").value);
+    const num2 = parseFloat(document.getElementById("num2").value);
+    const result = num1 + num2;
     document.getElementById("result").innerHTML = result;
   }
   
   function subtract() {
-    let num1 = document.getElementById("num1").value;
-    let num2 = document.getElementById("num2").value;
-    let result = Number(num1) - Number(num2);
+    const num1 = parseFloat(document.getElementById("num1").value);
+    const num2 = parseFloat(document.getElementById("num2").value);
+    const result = num1 - num2;
     document.getElementById("result").innerHTML = result;
   }
   
   function multiply() {
-    let num1 = document.getElementById("num1").value;
-    let num2 = document.getElementById("num2").value;
-    let result = Number(num1) * Number(num2);
+    const num1 = parseFloat(document.getElementById("num1").value);
+    const num2 = parseFloat(document.getElementById("num2").value);
+    const result = num1 * num2;
     document.getElementById("result").innerHTML = result;
   }
   
   function divide() {
-    let num1 = document.getElementById("num1").value;
-    let num2 = document.getElementById("num2").value;
-    if (num2 == 0) {
-      alert("Cannot divide by zero");
+    const num1 = parseFloat(document.getElementById("num1").value);
+    const num2 = parseFloat(document.getElementById("num2").value);
+    // Check for division by zero
+    if (num2 === 0) {
+      document.getElementById("result").innerHTML = "Error: Cannot divide by zero";
       return;
     }
-    let result = Number(num1) / Number(num2);
+    const result = num1 / num2;
     document.getElementById("result").innerHTML = result;
   }
+  
+  // Update the date in the footer
+  const today = new Date();
+  const date = today.toLocaleDateString();
+  document.getElementById("date").textContent = date;
+  
