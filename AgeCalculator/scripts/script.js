@@ -1,6 +1,6 @@
 function substractCalculate(){
-    let year1 = parseInt(document.getElementById('year'), 10);
-    let year2 = parseInt(document.getElementById("year2"), 10);
-    let rest = Number(year1) - Number(year2);
+    const year1 = parseFloat(document.getElementById("year").value);
+    const year2 = parseFloat(document.getElementById("year2").value);
+    const rest = Number(year1) - Number(year2);
     document.getElementById("result").innerHTML = rest;
 }
