@@ -7,14 +7,35 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <p>You can calculate whatever you need on this site.</p>
-    <input type="number" name="num1" id="num1"><br>
-    <input type="number" name="num2" id="num2"><br>
-    <input type="button" value="Add" onclick="add()">
-    <input type="button" value="Subtract" onclick="subtract()">
-    <input type="button" value="Multiply" onclick="multiply()">
-    <input type="button" value="Divide" onclick="divide()">
-    <h3>Result: <span id="result"></span></h3>
+    <div class="calculator">
+        <p>You can calculate whatever you need on this site.</p>
+        <input type="text" name="display" id="display" readonly><br>
+        <div class="button-row">
+            <input type="button" value="7" onclick="appendToDisplay('7')">
+            <input type="button" value="8" onclick="appendToDisplay('8')">
+            <input type="button" value="9" onclick="appendToDisplay('9')">
+            <input type="button" value="/" onclick="appendToDisplay('/')">
+        </div>
+        <div class="button-row">
+            <input type="button" value="4" onclick="appendToDisplay('4')">
+            <input type="button" value="5" onclick="appendToDisplay('5')">
+            <input type="button" value="6" onclick="appendToDisplay('6')">
+            <input type="button" value="*" onclick="appendToDisplay('*')">
+        </div>
+        <div class="button-row">
+            <input type="button" value="1" onclick="appendToDisplay('1')">
+            <input type="button" value="2" onclick="appendToDisplay('2')">
+            <input type="button" value="3" onclick="appendToDisplay('3')">
+            <input type="button" value="-" onclick="appendToDisplay('-')">
+        </div>
+        <div class="button-row">
+            <input type="button" value="0" onclick="appendToDisplay('0')">
+            <input type="button" value="." onclick="appendToDisplay('.')">
+            <input type="button" value="=" onclick="calculate()">
+            <input type="button" value="+" onclick="appendToDisplay('+')">
+        </div>
+        <h3>Result: <span id="result"></span></h3>
+    </div>
     <script src="scripts/script.js"></script>
 </body>
 <footer><span id="date"></span></footer>
