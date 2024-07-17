@@ -2,21 +2,27 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Felix Guzman - Personal Website</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- box icons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
+    <!-- header design -->
     <header>
         <img src="https://felixc2000.github.io/FelixProjects/felix.png" alt="Felix Guzman's Profile Picture">
         <h1>Felix Guzman</h1>
-        <p>Web Developer</p>
+        <p class="typed"></p>
     </header>
 
+    <!-- home section design -->
     <nav>
         <ul>
             <li><a href="#projects">Projects</a></li>
@@ -25,39 +31,42 @@
         </ul>
     </nav>
 
+    <!-- projects section design -->
+    <section id="projects">
+        <h2>My Projects</h2>
+        <!-- Add links and descriptions to your projects -->
+        <div class="project">
+            <h3>AdviWeather</h3>
+            <p>AdviWeather is a weather app that provides weather information, forecasts, and a 5-day outlook for any
+                location in the world.</p>
+            <a href="https://felixc2000.github.io/FelixProjects/AdviWeather/">Visit AdviWeather</a>
+        </div>
 
-    <h2>My Projects</h2>
-    <!-- Add links and descriptions to your projects -->
-    <div class="project">
-        <h3>AdviWeather</h3>
-        <p>AdviWeather is a weather app that provides weather information, forecasts, and a 5-day outlook for any
-            location in the world.</p>
-        <a href="https://felixc2000.github.io/FelixProjects/AdviWeather/">Visit AdviWeather</a>
-    </div>
+        <div class="project">
+            <h3>RecipeFinder</h3>
+            <p>RecipeFinder is a web app that allows users to search for recipes using ingredients, dishes, or cuisines. It
+                also provides a list of recently viewed recipes.</p>
+            <a href="https://felixc2000.github.io/FelixProjects/RecipeFinder/">Visit RecipeFinder</a>
+        </div>
 
-    <div class="project">
-        <h3>RecipeFinder</h3>
-        <p>RecipeFinder is a web app that allows users to search for recipes using ingredients, dishes, or cuisines. It
-            also provides a list of recently viewed recipes.</p>
-        <a href="https://felixc2000.github.io/FelixProjects/RecipeFinder/">Visit RecipeFinder</a>
-    </div>
+        <div class="project">
+            <h3>CurrencyFlipper</h3>
+            <p>CurrencyFlipper is a currency converter web app that supports 150+ currencies. It also provides exchange rate
+                forecasts based on historical data.</p>
+            <a href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/">Visit CurrencyFlipper</a>
+        </div>
 
-    <div class="project">
-        <h3>CurrencyFlipper</h3>
-        <p>CurrencyFlipper is a currency converter web app that supports 150+ currencies. It also provides exchange rate
-            forecasts based on historical data.</p>
-        <a href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/">Visit CurrencyFlipper</a>
-    </div>
-    <div class="project">
-        <h3>New Year CountDown</h3>
-        <p>New Year Countdown App is a user-friendly application designed to keep users excited and engaged as they
-            eagerly anticipate the arrival of the New Year. The app features a dynamic countdown timer, festive visual
-            elements, and optional customizable reminders, offering a delightful and interactive experience to help
-            users usher in the upcoming year with joy and anticipation.</p>
-        <a href="https://felixc2000.github.io/FelixProjects/NewYearCountDown">Visit NewYearCountDown</a>
-    </div>
+        <div class="project">
+            <h3>New Year CountDown</h3>
+            <p>New Year Countdown App is a user-friendly application designed to keep users excited and engaged as they
+                eagerly anticipate the arrival of the New Year. The app features a dynamic countdown timer, festive visual
+                elements, and optional customizable reminders, offering a delightful and interactive experience to help
+                users usher in the upcoming year with joy and anticipation.</p>
+            <a href="https://felixc2000.github.io/FelixProjects/NewYearCountDown">Visit NewYearCountDown</a>
+        </div>
     </section>
 
+    <!-- about section design -->
     <section id="about">
         <h2>About Me</h2>
         <p>Welcome to my personal corner of the web! I'm Felix Guzman, a passionate Web Developer with a knack for
@@ -79,7 +88,21 @@
         <p>Beyond my technical skills, I hold a PathwayConnect Certificate from BYU-Pathway Worldwide, emphasizing
             proficiency in English language, effective online collaboration, and the nurturing of leadership and
             problem-solving skills.</p>
+    </section>
 
-        
+    <!-- footer design -->
+    <footer>
+        <p>&copy; 2024 Felix Guzman. All rights reserved.</p>
+    </footer>
+
+    <!-- scroll reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- typed js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <!-- custom js -->
+    <script src="js/script.js"></script>
+</body>
 
 </html>
