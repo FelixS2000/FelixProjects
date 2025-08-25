@@ -170,6 +170,7 @@ create_cloudfront() {
     
     echo $DISTRIBUTION_ID > .distribution-id
     echo $DOMAIN_NAME > .domain-name
+    echo $BUCKET_NAME > .bucket-name
     
     success "CloudFront distribution created: $DISTRIBUTION_ID"
     success "Domain name: $DOMAIN_NAME"
@@ -253,7 +254,7 @@ display_results() {
 
 # Cleanup function
 cleanup() {
-    rm -f .oac-id .distribution-id .domain-name
+    rm -f .oac-id
 }
 
 # Main deployment process
