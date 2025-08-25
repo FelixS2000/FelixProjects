@@ -3,27 +3,28 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('https://open.er-api.com/v6/latest')
         .then(response => response.json())
         .then(data => {
-            const currencies = Object.keys(data.rates);
+            if (!data || !data.rates) {
+                throw new Error('Invalid API response format');
+            }
+            const currencies = Object.keys(data.rates).slice(0, 200);
             
             // Populate the currency dropdowns
             const fromCurrencySelect = document.getElementById('from');
             const toCurrencySelect = document.getElementById('to');
 
-            currencies.forEach(currency => {
-                const option = document.createElement('option');
-                option.value = currency;
-                option.text = currency;
-                fromCurrencySelect.add(option);
-            });
+            function populateDropdown(selectElement, currencies) {
+                currencies.forEach(currency => {
+                    const option = document.createElement('option');
+                    option.value = currency;
+                    option.text = currency;
+                    selectElement.add(option);
+                });
+            }
 
-            currencies.forEach(currency => {
-                const option = document.createElement('option');
-                option.value = currency;
-                option.text = currency;
-                toCurrencySelect.add(option);
-            });
+            populateDropdown(fromCurrencySelect, currencies);
+            populateDropdown(toCurrencySelect, currencies);
         })
-        .catch(error => console.error('Error fetching currencies:', error));
+        .catch(error => console.error('Error fetching currencies:', encodeURIComponent(error.message || 'Unknown error')));
 });
 
 function convertCurrency() {
@@ -37,7 +38,7 @@ function convertCurrency() {
             const exchangeRate = data.rates[toCurrency];
             const result = (amount * exchangeRate).toFixed(2);
 
-            document.getElementById('result').innerHTML = `${amount} ${fromCurrency} is equal to ${result} ${toCurrency}`;
+            document.getElementById('result').textContent = `${amount} ${fromCurrency} is equal to ${result} ${toCurrency}`;
         })
-        .catch(error => console.error('Error converting currency:', error));
+        .catch(error => console.error('Error converting currency:', encodeURIComponent(error.message || 'Unknown error')));
 }
