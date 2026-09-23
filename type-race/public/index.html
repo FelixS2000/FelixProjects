@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type Race</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="game-panel">
+        <section id="lobbyScreen" class="screen active">
+          <div class="card lobby-card">
+            <p class="eyebrow">Multiplayer typing challenge</p>
+            <h1>Type Race</h1>
+            <p class="subtitle">Battle your friends in a fast, funny sentence sprint.</p>
+
+            <div class="rules-box">
+              <h2>Rules</h2>
+              <ol>
+                <li>Join a room with 2–8 players.</li>
+                <li>Everyone receives the same sentence.</li>
+                <li>Wait for the server countdown.</li>
+                <li>Type the sentence exactly as shown.</li>
+                <li>Every correctly completed word increases your combo.</li>
+                <li>A typing mistake resets your combo to 1x.</li>
+                <li>The first player to finish gets 1st place.</li>
+                <li>Other players have up to 30 seconds after the first finish.</li>
+                <li>Players who do not finish are ranked by progress and score.</li>
+                <li>The match contains 3 rounds.</li>
+                <li>The player with the highest final score wins the match.</li>
+              </ol>
+            </div>
+
+            <div class="field-group">
+              <label for="playerName">Player Name</label>
+              <input id="playerName" type="text" maxlength="20" placeholder="Enter your name" />
+            </div>
+
+            <div class="button-row">
+              <button id="createRoomBtn" class="primary-button" type="button">Create Room</button>
+            </div>
+
+            <div class="divider"><span>or</span></div>
+
+            <div class="join-row">
+              <div class="field-group compact">
+                <label for="roomCodeInput">Room Code</label>
+                <input id="roomCodeInput" type="text" maxlength="4" placeholder="ABCD" />
+              </div>
+              <button id="joinRoomBtn" class="secondary-button" type="button">Join Room</button>
+            </div>
+
+            <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <section id="roomScreen" class="screen hidden">
+          <div class="card room-card">
+            <div class="room-header">
+              <div>
+                <p class="eyebrow">Lobby</p>
+                <h2>Room Code: <span id="roomCodeDisplay">--</span></h2>
+              </div>
+              <button id="startGameBtn" class="primary-button" type="button">Start Game</button>
+            </div>
+
+            <div class="players-panel">
+              <h3>Players</h3>
+              <div id="roomPlayers" class="player-list"></div>
+            </div>
+
+            <p id="hostHint" class="host-hint">Waiting for the host...</p>
+          </div>
+        </section>
+
+        <section id="raceScreen" class="screen hidden">
+          <div class="card race-card">
+            <div class="race-topbar">
+              <div>
+                <p class="eyebrow">Round</p>
+                <h2 id="roundLabel">Round 1/3</h2>
+              </div>
+              <div class="stats-grid">
+                <div class="stat-box">
+                  <span class="stat-label">Score</span>
+                  <strong id="scoreValue">0</strong>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-label">Combo</span>
+                  <strong id="comboValue">1x</strong>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-label">Difficulty</span>
+                  <strong id="difficultyValue">Easy</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="challenge-block">
+              <h3>Challenge</h3>
+              <p id="challengeText" class="challenge-text"></p>
+            </div>
+
+            <div class="input-wrap">
+              <label for="typingInput">Type here</label>
+              <textarea id="typingInput" rows="4" placeholder="Start typing when the countdown ends..." disabled></textarea>
+            </div>
+
+            <div class="progress-block">
+              <div class="progress-header">
+                <span>Progress</span>
+                <span id="progressValue">0%</span>
+              </div>
+              <div class="progress-track">
+                <div id="progressFill" class="progress-fill"></div>
+              </div>
+            </div>
+
+            <div class="competition-panel">
+              <h3>Players</h3>
+              <div id="livePlayers" class="live-player-list"></div>
+            </div>
+
+            <div id="countdownBanner" class="countdown-banner" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section id="resultsScreen" class="screen hidden">
+          <div class="card results-card">
+            <h2>🏁 Round Results</h2>
+            <ol id="resultsList" class="results-list"></ol>
+            <button id="nextRoundBtn" class="primary-button hidden" type="button">NEXT ROUND</button>
+            <p id="resultsHostMessage" class="host-hint"></p>
+          </div>
+        </section>
+
+        <section id="finalScreen" class="screen hidden">
+          <div class="card final-card">
+            <h2>🏆 Final Results</h2>
+            <p class="final-summary">Game Complete!</p>
+            <p class="final-summary secondary">Highest total score wins the match.</p>
+            <ol id="finalLeaderboard" class="results-list"></ol>
+            <button id="playAgainBtn" class="primary-button" type="button">Play Again</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>
